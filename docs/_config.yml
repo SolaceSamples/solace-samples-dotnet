@@ -1,5 +1,5 @@
 # Site settings
-title: Solace Samples .NET
+title: Solace Samples C#/.NET
 baseurl: "/solace-samples-dotnet" # the subpath of your site, e.g. /solace-samples-java
 repository: https://github.com/SolaceSamples/solace-samples-dotnet
 
