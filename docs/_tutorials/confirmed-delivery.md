@@ -178,7 +178,7 @@ public void HandleSessionEvent(object sender, SessionEventArgs args)
 
 Combining the example source code show above results in the following source code files:
 
-*   [ConfirmedPublish.zip]({{ site.repository }}/blob/master/src/ConfirmedDelivery/ConfirmedPublish.zip){:target="_blank"}
+*   [ConfirmedPublish.cs]({{ site.repository }}/blob/master/src/ConfirmedDelivery/ConfirmedPublish.cs){:target="_blank"}
 
 ### Building
 
