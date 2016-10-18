@@ -1,4 +1,4 @@
 - title: C#/.NET Tutorials
   tutorials:
-  - topic-to-queue-mapping
   - confirmed-delivery
+  - topic-to-queue-mapping
