@@ -8,7 +8,7 @@ icon: request-reply.png
 
 This tutorial outlines both roles in the request-response message exchange pattern. It will show you how to act as the client by creating a request, sending it and waiting for the response. It will also show you how to act as the server by receiving incoming requests, creating a reply and sending it back to the client. It builds on the basic concepts introduced in [publish/subscribe tutorial]({{ site.baseurl }}/publish-subscribe).
 
-![]({{ site.baseurl }}/docs/images/request-reply.png)
+![]({{ site.baseurl }}/images/request-reply.png)
 
 ## Assumptions
 
@@ -45,7 +45,7 @@ It is also possible to use guaranteed messaging for request reply scenarios. In 
 
 For request-reply messaging to be successful it must be possible for the requestor to correlate the request with the subsequent reply. Solace messages support two fields that are needed to enable request-reply correlation. The reply-to field can be used by the requestor to indicate a Solace Topic or Queue where the reply should be sent. A natural choice for this is often the unique `P2PINBOX_IN_USE` topic which is an auto-generated unique topic per client which is accessible as a session property. The second requirement is to be able to detect the reply message from the stream of incoming messages. This is accomplished using the correlation-id field. This field will transit the Solace messaging system unmodified. Repliers can include the same correlation-id in a reply message to allow the requestor to detect the corresponding reply. The figure below outlines this exchange.
 
-![]({{ site.baseurl }}/docs/images/Request-Reply_diagram-1.png)
+![]({{ site.baseurl }}/images/Request-Reply_diagram-1.png)
 
 For direct messages however, this is simplified through the use of the `Requestor` object as shown in this sample.
 
@@ -65,7 +65,7 @@ As with other tutorials, this tutorial requires an instance of ISession connecte
 
 First let’s look at the requestor. This is the application that will send the initial request message and wait for the reply.
 
-![]({{ site.baseurl }}/docs/images/Request-Reply_diagram-2.png)
+![]({{ site.baseurl }}/images/Request-Reply_diagram-2.png)
 
 The requestor must create a message and the topic to send the message to:
 
@@ -92,7 +92,7 @@ If the timeout is set to zero then the `SendRequest` call becomes non-blocking a
 
 Now it is time to receive the request and generate an appropriate reply.
 
-![Request-Reply_diagram-3]({{ site.baseurl }}/docs/images/Request-Reply_diagram-3.png)
+![Request-Reply_diagram-3]({{ site.baseurl }}/images/Request-Reply_diagram-3.png)
 
 Just as with previous tutorials, you still need to connect a session and subscribe to the topics that requests are sent on. The following is an example of such reply.
 
