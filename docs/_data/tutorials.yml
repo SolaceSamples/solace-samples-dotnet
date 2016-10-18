@@ -1,4 +1,5 @@
 - title: C#/.NET Tutorials
   tutorials:
-    - request-reply
-    - topic-to-queue-mapping
+  - request-reply
+  - confirmed-delivery
+  - topic-to-queue-mapping
