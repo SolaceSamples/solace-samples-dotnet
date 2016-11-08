@@ -1,6 +1,7 @@
 - title: C#/.NET Tutorials
   tutorials:
   - publish-subscribe
+  - persistence
   - request-reply
   - confirmed-delivery
   - topic-to-queue-mapping
