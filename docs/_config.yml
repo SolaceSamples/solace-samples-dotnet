@@ -6,7 +6,19 @@ repository: https://github.com/SolaceSamples/solace-samples-dotnet
 # Also see _includes/intro.html to customize the description which gets included in index.html.
 
 # Links
+links-downloads: http://dev.solace.com/downloads/
+links-community: http://dev.solace.com/community/
+links-get-started: http://dev.solace.com/get-started/dotnet-tutorials/
 docs-vmr-setup: http://docs.solace.com/Solace-VMR-Set-Up/Setting-Up-VMRs.htm
+docs-core-concepts: http://docs.solace.com/Features/Core-Concepts.htm
+docs-endpoints: http://docs.solace.com/Features/Core-Concepts.htm#endpoints
+docs-api-concepts: http://docs.solace.com/Features/Core-Concepts.htm#api-concepts
+docs-solace-apis: http://docs.solace.com/Solace-Messaging-APIs/Solace-APIs-Overview.htm
+docs-gm-rr: http://docs.solace.com/Solace-Messaging-APIs/Request-Reply-Messaging.htm
+docs-topic-queue: http://docs.solace.com/Features/Core-Concepts.htm#topic-queue-mapping
+docs-dotnet: http://docs.solace.com/Solace-Messaging-APIs/net-api-home.htm
+docs-client-profile: http://docs.solace.com/Features/Core-Concepts.htm#client-profile
+docs-dotnet-api: http://docs.solace.com/API-Developer-Online-Ref-Documentation/net/index.html
 
 #----------------------------------------------------
 # Generally don't modify items below this point

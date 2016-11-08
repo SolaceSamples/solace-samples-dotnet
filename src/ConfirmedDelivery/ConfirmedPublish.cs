@@ -197,8 +197,6 @@ namespace Tutorial
         #region Main
         static void Main(string[] args)
         {
-            Console.WriteLine("Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.");
-
             if ((args.Length < 1) || string.IsNullOrWhiteSpace(args[0]))
             {
                 Console.WriteLine("Please provide a parameter: non-empty value for the Solace messaging router host name or IP address, e.g. \"ConfirmedPublish 192.168.1.111\"");

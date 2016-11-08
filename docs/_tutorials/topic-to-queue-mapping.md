@@ -9,7 +9,7 @@ This tutorial builds on the basic concepts introduced in the [Persistence with Q
 
 ![topic-to-queue-mapping]({{ site.baseurl }}/images/topic-to-queue-mapping.png)
 
-In addition to spooling messages published directly to the queue, it is possible to add one or more topic subscriptions to a durable queue so that messages published to those topics are also delivered to and spooled by the queue. This is a powerful feature that enables queues to participate equally in point to point and publish / subscribe messaging models. More details about the [“Topic to Queue Mapping” feature here](http://docs.solacesystems.com/Features/Core-Concepts.htm#topic-queue-mapping){:target="_top"}.
+In addition to spooling messages published directly to the queue, it is possible to add one or more topic subscriptions to a durable queue so that messages published to those topics are also delivered to and spooled by the queue. This is a powerful feature that enables queues to participate equally in point to point and publish / subscribe messaging models. More details about the [“Topic to Queue Mapping” feature here]({{ site.docs-topic-queue}}){:target="_top"}.
 
 The following diagram illustrates this feature.
 
@@ -21,14 +21,14 @@ If you have a durable queue named `Q`, it will receive messages published direct
 
 This tutorial assumes the following:
 
-*   You are familiar with Solace [core concepts](http://docs.solacesystems.com/Features/Core-Concepts.htm){:target="_top"}.
+*   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
 *   You have access to a running Solace message router with the following configuration:
     *   Enabled message VPN configured for guaranteed messaging support.
     *   Enabled client username
     *   Client-profile enabled with guaranteed messaging permissions.
 *   You understand the basics introduced in [Persistence with Queues]({{ site.baseurl }}/persistence-with-queues)
 
-Note that one simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here](http://docs.solacesystems.com/Solace-VMR-Set-Up/Starting-VMRs-for-the-First-Time/Setting-Up-an-Eval-VMR-in-AWS.htm){:target="_top"}. By default the Solace VMR will with the “default” message VPN configured and ready for guaranteed messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration adapt the tutorial appropriately to match your configuration.
+Note that one simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will with the “default” message VPN configured and ready for guaranteed messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration adapt the tutorial appropriately to match your configuration.
 
 ## Goals
 
@@ -43,7 +43,7 @@ As with other tutorials, this tutorial will connect to the default message VPN o
 
 ## Obtaining the Solace API
 
-This tutorial depends on you having the Solace C# API downloaded and available. The Solace C# API library can be [downloaded here](http://dev.solacesystems.com/downloads/){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples. The instructions in this tutorial assume you have downloaded the C# API library and unpacked it to a known location. If your environment differs then adjust the build instructions appropriately.
+This tutorial depends on you having the Solace C# API downloaded and available. The Solace C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples. The instructions in this tutorial assume you have downloaded the C# API library and unpacked it to a known location. If your environment differs then adjust the build instructions appropriately.
 
 ## Connection setup
 
@@ -79,7 +79,7 @@ The only difference in the above is the duplicate subscription processing proper
 
 One aspect to consider when adding subscriptions is how your application wishes the Solace API to behave in the face of pre-existing duplicate subscriptions. The default behavior is to throw an exception if an application tries to add a subscription that already exists. In this tutorial, we’ll relax that behavior and change our session so that it will tolerate the subscription already existing.
 
-For more details on this session flag, refer to [the product documentation](http://docs.solacesystems.com/Solace-Messaging-APIs/net-api-home.htm){:target="_top"}.
+For more details on this session flag, refer to [the product documentation]({{ site.docs-dotnet }}){:target="_top"}.
 
 ## Review: Receiving message from a queue
 
@@ -106,7 +106,7 @@ else
 }
 ```
 
-In this case the tutorial requires permission to send and receive guaranteed messages, configure endpoints and manage queue subscriptions. If these capabilities are not available on the message router the tutorial will not proceed. If these capabilities are missing, you update the client-profile used by the client-username to enable them. See the [SolAdmin User Guide – Configuring Clients](https://sftp.solacesystems.com/Portal_Docs/#page/SolAdmin_User_Guide/Configuring_Clients.html) for details.
+In this case the tutorial requires permission to send and receive guaranteed messages, configure endpoints and manage queue subscriptions. If these capabilities are not available on the message router the tutorial will not proceed. If these capabilities are missing, you update the client-profile used by the client-username to enable them. See the [Solace documentation]({{ site.docs-client-profile}}){:target="_top"} for details.
 
 ## Adding a Subscription to a Queue
 
@@ -165,7 +165,7 @@ CountdownEvent.Wait();
 
 The full source code for this example is available in [GitHub]({{ site.repository }}){:target="_blank"}. If you combine the example source code shown above results in the following source:
 
-*   [TopicToQueueMapping.cs]({ site.repository }}/blob/master/src/TopicToQueueMapping/TopicToQueueMapping.cs){:target="_blank"}
+*   [TopicToQueueMapping.cs]({{ site.repository }}/blob/master/src/TopicToQueueMapping/TopicToQueueMapping.cs){:target="_blank"}
 
 ### Building
 
@@ -215,4 +215,4 @@ Message content: Topic to Queue Mapping Tutorial! Message ID: 4
 Finished.
 ```
 
-If you have any problems with this tutorial, check the [Solace community](http://dev.solacesystems.com/community/){:target="_top"} for answers to common issues.
+If you have any problems with this tutorial, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.

@@ -6,18 +6,19 @@ icon: publish-subscribe.png
 ---
 
 This tutorial will introduce you to the fundamentals of the Solace API by connecting a client, adding a topic subscription and sending a message matching this topic subscription. This forms the basis for any publish / subscribe message exchange illustrated here: 
+
 ![]({{ site.baseurl }}/images/publish-subscribe.png) 
 
 ## Assumptions 
 
 This tutorial assumes the following: 
 
-* You are familiar with Solace [core concepts](http://docs.solace.com/Features/Core-Concepts.htm). 
+* You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}. 
 * You have access to a running Solace message router with the following configuration: 
 	* Enabled message VPN 
 	* Enabled client username 
 	
-One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here](http://docs.solace.com/Solace-VMR-Set-Up/Starting-VMRs-for-the-First-Time/Setting-Up-a-VMR-with-VMWare.htm). By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration. 
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration. 
 
 ## Goals 
 
@@ -31,68 +32,40 @@ The goal of this tutorial is to demonstrate the most basic messaging interaction
 In order to send or receive messages to a Solace message router, you need to know a few details of how to connect to the Solace message router. Specifically you need to know the following:
 
 <table>
-
 <tbody>
-
 <tr>
-
-<td width="106">**Resource**</td>
-
-<td width="110">**Value**</td>
-
-<td width="411">**Description**</td>
-
+<th>Resource</th>
+<th>Value</th>
+<th>Description</th>
 </tr>
-
 <tr>
-
-<td width="106">**Host**</td>
-
-<td width="110">String of the form <<dns name="">> or <<ip:port>></ip:port></dns></td>
-
-<td width="411">This is the address client’s use when connecting to the Solace message router to send and receive messages. For a Solace VMR this there is only a single interface so the IP is the same as the management IP address. For Solace message router appliances this is the host address of the message-backbone.</td>
-
+<td>Host</td>
+<td>String of the form <code>DNS name</code> or <code>IP:Port</code></td>
+<td>This is the address client’s use when connecting to the Solace message router to send and receive messages. For a Solace VMR this there is only a single interface so the IP is the same as the management IP address. For Solace message router appliances this is the host address of the message-backbone.</td>
 </tr>
-
 <tr>
-
-<td width="106">**Message VPN**</td>
-
-<td width="110">String</td>
-
-<td width="411">The Solace message router Message VPN that this client should connect to. The simplest option is to use the “default” message-vpn which is present on all Solace message routers and fully enabled for message traffic on Solace VMRs.</td>
-
+<td>Message VPN</td>
+<td>String</td>
+<td>The Solace message router Message VPN that this client should connect to. The simplest option is to use the “default” message-vpn which is present on all Solace message routers and fully enabled for message traffic on Solace VMRs.</td>
 </tr>
-
 <tr>
-
-<td width="106">**Client Username**</td>
-
-<td width="110">String</td>
-
-<td width="411">The client username. For the Solace VMR default message VPN, authentication is disabled by default, so this can be any value.</td>
-
+<td>Client Username</td>
+<td>String</td>
+<td>The client username. For the Solace VMR default message VPN, authentication is disabled by default, so this can be any value.</td>
 </tr>
-
 <tr>
-
-<td width="106">**Client Password**</td>
-
-<td width="110">String</td>
-
-<td width="411">The optional client password. For the Solace VMR default message VPN, authentication is disabled by default, so this can be any value or omitted.</td>
-
+<td>Client Password</td>
+<td>String</td>
+<td>The optional client password. For the Solace VMR default message VPN, authentication is disabled by default, so this can be any value or omitted.</td>
 </tr>
-
 </tbody>
-
 </table>
 
 For the purposes of this tutorial, you will connect to the default message VPN of a Solace VMR so the only required information to proceed is the Solace VMR host string which this tutorial accepts as an argument. 
 
 ## Obtaining the Solace API 
 
-This tutorial depends on you having the Solace C# API downloaded and available. The Solace C# API library can be [downloaded here](/downloads/). The C# API is distributed as a zip file containing the required libraries, API documentation, and examples. The instructions in this tutorial assume you have downloaded the C# API library and unpacked it to a known location. If your environment differs then adjust the build instructions appropriately. 
+This tutorial depends on you having the Solace C# API downloaded and available. The Solace C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples. The instructions in this tutorial assume you have downloaded the C# API library and unpacked it to a known location. If your environment differs then adjust the build instructions appropriately. 
 
 ## Connecting to the Solace message router 
 
@@ -109,7 +82,7 @@ cfp.LogToConsoleError();
 ContextFactory.Instance.Init(cfp);
 ```
 
-Then the `ContextFactory` instance can be used to create the context `IContext` (see API [concepts](http://docs.solace.com/Features/Core-Concepts.htm#api-concepts)) that is used to create Solace sessions (ISession) from a set of `SessionProperties`. 
+Then the `ContextFactory` instance can be used to create the context `IContext` (see API [concepts]({{ site.docs-api-concepts }}){:target="_top"}) that is used to create Solace sessions (ISession) from a set of `SessionProperties`. 
 
 Notice the optional `HandleMessage` parameter in the `CreateSession` call. This is the message consumer. It needs to be present only for receiving a message (see details on how to receive a message in the next section of this tutorial).
 
@@ -154,7 +127,7 @@ private void HandleMessage(object source, MessageEventArgs args)
     using (IMessage message = args.Message)
     {
         // Expecting the message content as a binary attachment
-        Console.WriteLine("Message content: {0}",         Encoding.ASCII.GetString(message.BinaryAttachment));
+        Console.WriteLine("Message content: {0}", Encoding.ASCII.GetString(message.BinaryAttachment));
         // finish the program
         WaitEventWaitHandle.Set();
     }
@@ -219,8 +192,8 @@ At this point a message to the Solace message router has been sent and your wait
 
 Combining the example source code shown above results in the following source code files: 
 
-*   [TopicPublisher.cs]({ site.repository }}/blob/master/src/src/TopicPublisher/TopicPublisher.cs){:target="_blank"}
-*   [TopicSubscriber.cs]({ site.repository }}/blob/master/src/src/TopicSubscriber/TopicSubscriber.cs){:target="_blank"}
+*   [TopicPublisher.cs]({{ site.repository }}/blob/master/src/TopicPublisher/TopicPublisher.cs){:target="_blank"}
+*   [TopicSubscriber.cs]({{ site.repository }}/blob/master/src/TopicSubscriber/TopicSubscriber.cs){:target="_blank"}
 
 ## Building 
 
@@ -228,7 +201,7 @@ Modify the example source code to reflect your Solace messaging router host name
 
 Build it from Microsoft Visual Studio or command line:
 
-```csharp
+```
 > csc TopicPublisher.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe
 > csc TopicSubscriber.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe
 ```
@@ -241,10 +214,9 @@ Both DLLs are part of the Solace C#/.NET API distribution and located in `solcli
 
 First start the `TopicSubscriber.exe` so that it is up and waiting for published messages. Then you can use the `TopicPublisher.exe` sample to publish a message.
 
-```csharp
+```
 $ ./TopicSubscriber HOST
-Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.
-Connecting as tutorial@default on HOST...
+\Connecting as tutorial@default on HOST...
 Session successfully connected.
 Waiting for a message to be published...
 Received published message.
@@ -252,9 +224,8 @@ Message content: Sample Message
 Finished.
 ```
 
-```csharp
+```
 $ ./TopicPublisher HOST
-Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.
 Connecting as tutorial@default on HOST...
 Session successfully connected.
 Publishing message...
@@ -264,4 +235,4 @@ Finished.
 
 With that you now know how to successfully implement publish-subscribe message exchange pattern using Direct messages. 
 
-If you have any issues publishing and receiving a message, check the Solace community Q&A for answers to common issues seen.	
+If you have any issues publishing and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues seen.	

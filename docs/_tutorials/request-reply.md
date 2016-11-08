@@ -14,12 +14,12 @@ This tutorial outlines both roles in the request-response message exchange patte
 
 This tutorial assumes the following:
 
-*   You are familiar with Solace [core concepts](http://dev.solacesystems.com/docs/core-concepts/){:target="_top"}.
+*   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
 *   You have access to a running Solace message router with the following configuration:
     *   Enabled message VPN
     *   Enabled client username
 
-One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here](http://dev.solacesystems.com/docs/get-started/setting-up-solace-vmr_vmware/){:target="_top"}. By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
 
 The build instructions in this tutorial assume you are using a Linux shell. If your environment differs, adapt the instructions.
 
@@ -39,7 +39,7 @@ The goal of this tutorial is to understand the following:
 
 Request-reply messaging is supported by the Solace message router for all delivery modes. For direct messaging, the Solace APIs provide the Requestor object for convenience. This object makes it easy to send a request and wait for the reply message. It is a convenience object that makes use of the API provided “inbox” topic that is automatically created for each Solace client and automatically correlates requests with replies using the message correlation ID. (See Message Correlation below for more details). On the reply side another convenience method enables applications to easily send replies for specific requests. Direct messaging request reply is the delivery mode that is illustrated in this sample.
 
-It is also possible to use guaranteed messaging for request reply scenarios. In this case the replier can listen on a queue for incoming requests and the requestor can use a temporary endpoint to attract replies. The requestor and replier must manually correlate the messages. This is explained further in the [Solace product documentation](https://sftp.solacesystems.com/Portal_Docs/){:target="_top"} and shown in the API samples named `RRGuaranteedRequestor` and `RRGuaranteedReplier`.
+It is also possible to use guaranteed messaging for request reply scenarios. In this case the replier can listen on a queue for incoming requests and the requestor can use a temporary endpoint to attract replies. The requestor and replier must manually correlate the messages. This is explained further in the [Solace documentation]({{ site.docs-gm-rr }}){:target="_top"} and shown in the API samples named `RRGuaranteedRequestor` and `RRGuaranteedReplier`.
 
 ### Message Correlation
 
@@ -51,9 +51,9 @@ For direct messages however, this is simplified through the use of the `Requesto
 
 ## Trying it yourself
 
-This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples](http://dev.solacesystems.com/get-started/dotnet-tutorials/request-reply_dotnet/){:target="_top"}.
+This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples]({{ site.links-get-started }}){:target="_top"}.
 
-To successfully build the samples you must have the C# API downloaded and available. The C# API library can be [downloaded here](http://dev.solacesystems.com/downloads/){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples.
+To successfully build the samples you must have the C# API downloaded and available. The C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples.
 
 At the end, this tutorial walks through downloading and running the sample from source.
 
@@ -155,8 +155,8 @@ else
 
 The full source code for this example is available in [GitHub]({{ site.repository }}){:target="_blank"}. If you combine the example source code shown above results in the following source:
 
-*   [BasicRequestor.cs]({{ site.repository }}/blob/master/src/RequestReply/BasicRequestor/BasicRequestor.cs){:target="_blank"}
-*   [BasicReplier.cs]({{ site.repository }}/blob/master/src/RequestReply/BasicReplier/BasicReplier.cs){:target="_blank"}
+*   [BasicRequestor.cs]({{ site.repository }}/blob/master/src/BasicRequestor/BasicRequestor.cs){:target="_blank"}
+*   [BasicReplier.cs]({{ site.repository }}/blob/master/src/BasicReplier/BasicReplier.cs){:target="_blank"}
 
 ### Getting the Source
 
@@ -188,7 +188,6 @@ First start the BasicReplier.exe so that it is up and listening for requests. Th
 
 ```
 $ ./BasicReplier HOST
-Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.
 Connecting as tutorial@default on HOST...
 Session successfully connected.
 Waiting for a request to come in...
@@ -201,7 +200,6 @@ Finished.
 
 ```
 $ ./BasicRequestor HOST
-Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.
 Connecting as tutorial@default on HOST...
 Session successfully connected.
 Sending request...
@@ -211,4 +209,4 @@ Finished.
 
 With that you now know how to successfully implement the request-reply message exchange pattern using Direct messages.
 
-If you have any issues sending and receiving a message, check the [Solace community](http://dev.solacesystems.com/community/){:target="_top"} for answers to common issues.
+If you have any issues sending and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.

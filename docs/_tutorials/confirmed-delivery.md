@@ -13,13 +13,13 @@ This tutorial builds on the basic concepts introduced in [Persistence with Queue
 
 This tutorial assumes the following:
 
-*   You are familiar with Solace [core concepts](http://dev.solacesystems.com//docs/core-concepts/){:target="_top"}.
+*   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
 *   You have access to a running Solace message router with the following configuration:
     *   Enabled message VPN configured for guaranteed messaging support.
     *   Enabled client username.
     *   Client-profile enabled with guaranteed messaging permissions.
 
-One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here](http://dev.solacesystems.com/docs/get-started/setting-up-solace-vmr_vmware/){:target="_top"}. By default the Solace VMR will run with the "default" message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the "default" message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
 
 ## Goals
 
@@ -231,9 +231,5 @@ Finished.
 
 You have now successfully sent persistent messages to a Solace router and confirmed its receipt by correlating the acknowledgement.
 
-If you have any issues sending and receiving a message, check the [Solace community](http://dev.solacesystems.com/community/){:target="_top"} for answers to common issues.
-
-## Up Next:
-
-*   [Learn how to map topics to a queue](http://dev.solacesystems.com/get-started/dotnet-tutorials/topic-queue-mapping_dotnet/){:target="_top"}
+If you have any issues sending and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.
 
