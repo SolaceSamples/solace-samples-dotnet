@@ -169,19 +169,21 @@ The full source code for this example is available in [GitHub]({{ site.repositor
 
 ### Building
 
+Modify the example source code to reflect your Solace messaging router Virtual Private Network (VPN) name and credentials for connection (client username and optional password) as needed.
+
 Build it from Microsoft Visual Studio or command line:
 
 ```
-> csc TopicToQueueMapping.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicToQueueMapping.exe
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicToQueueMapping.exe TopicToQueueMapping.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your executables are.
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
 
 Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
 
 ### Sample Output
 
-Start the TopicToQueueMapping to send and receive messages.
+Start the TopicToQueueMapping to send and receive messages, passing your Solace messaging router host name (or IP address) as parameter.
 
 ```
 $ ./TopicToQueueMapping HOST

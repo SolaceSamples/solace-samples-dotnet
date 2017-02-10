@@ -197,22 +197,22 @@ Combining the example source code shown above results in the following source co
 
 ## Building 
 
-Modify the example source code to reflect your Solace messaging router host name (or IP address). 
+Modify the example source code to reflect your Solace messaging router Virtual Private Network (VPN) name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
 ```
-> csc TopicPublisher.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe
-> csc TopicSubscriber.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe  TopicPublisher.cs
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe  TopicSubscriber.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your executables are. 
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
 
 Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
 
 ## Sample Output 
 
-First start the `TopicSubscriber.exe` so that it is up and waiting for published messages. Then you can use the `TopicPublisher.exe` sample to publish a message.
+First start the `TopicSubscriber.exe` so that it is up and waiting for published messages. Then you can use the `TopicPublisher.exe` sample to publish a message. Pass your Solace messaging router host name (or IP address) as parameter.
 
 ```
 $ ./TopicSubscriber HOST
