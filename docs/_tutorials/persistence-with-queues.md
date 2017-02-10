@@ -165,7 +165,7 @@ Combining the example source code show above results in the following source cod
 
 ### Building
 
-Modify the example source code to reflect your Solace messaging router Virtual Private Network (VPN) name and credentials for connection (client username and optional password) as needed.
+Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
