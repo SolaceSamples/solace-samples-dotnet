@@ -182,19 +182,21 @@ Combining the example source code show above results in the following source cod
 
 ### Building
 
+Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
+
 Build it from Microsoft Visual Studio or command line:
 
 ```
-csc ConfirmedPublish.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: ConfirmedPublish.exe
+csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: ConfirmedPublish.exe ConfirmedPublish.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your executables are.
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
 
 ### Sample Output
 
-Start the `ConfirmedPublish` to send messages to the queue and see confirmations.
+Start the `ConfirmedPublish` to send messages to the queue, passing your Solace messaging router host name (or IP address) as parameter and see confirmations.
 
 ```
 $ ./ConfirmedPublish HOST

@@ -165,20 +165,22 @@ Combining the example source code show above results in the following source cod
 
 ### Building
 
+Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
+
 Build it from Microsoft Visual Studio or command line:
 
 ```
-> csc QueueProducer.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: QueueProducer.exe
-> csc QueueConsumer.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: QueueConsumer.exe
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: QueueProducer.exe QueueProducer.cs
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: QueueConsumer.exe QueueConsumer.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your executables are.
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
 
 ### Sample Output
 
-First start the `QueueProducer` to send a message to the queue. Then you can use the `QueueConsumer` sample to receive the messages from the queue.
+First start the `QueueProducer` to send a message to the queue. Then you can use the `QueueConsumer` sample to receive the messages from the queue. Pass your Solace messaging router host name (or IP address) as parameter.
 
 ```
 $ ./QueueProducer HOST

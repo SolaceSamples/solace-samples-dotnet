@@ -169,22 +169,22 @@ cd {{ site.baseurl | remove: '/'}}
 
 ### Building
 
-Modify the example source code to reflect your Solace messaging router host name (or IP address), its Virtual Private Network (VPN) name and credentials for connection (client username and optional password).
+Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
 ```
-> csc BasicReplier.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:BasicReplier.exe
-> csc BasicRequestor.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:BasicRequestor.exe
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:BasicReplier.exe BasicReplier.cs
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:BasicRequestor.exe BasicRequestor.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your executables are.
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
 
 ### Running the Sample
 
-First start the BasicReplier.exe so that it is up and listening for requests. Then you can use the BasicRequestor.exe sample to send requests and receive replies.
+First start the BasicReplier.exe so that it is up and listening for requests. Then you can use the BasicRequestor.exe sample to send requests and receive replies. Pass your Solace messaging router host name (or IP address) as parameter.
 
 ```
 $ ./BasicReplier HOST

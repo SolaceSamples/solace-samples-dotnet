@@ -19,16 +19,20 @@ To check out the project and build it, do the following:
  
 ### Download the Solace C# API
 
-The C# API library can be [downloaded here](http://dev.solace.com/downloads/). The build instructions below assume you have unpacked the tar file into `src` subdirectory of your GitHub repository. 
+The C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The build instructions below assume you have unpacked the zip file to a known location. 
 
 ### Build the Samples
 
 Building these examples is simple. The following provides an example. For ideas on how to build with other IDEs you can consult the README of the C# API library.
 
 ```
-> csc TopicPublisher.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe
-> csc TopicSubscriber.cs /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe  TopicPublisher.cs
+> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe  TopicSubscriber.cs
 ```
+
+You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
+
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
 
 ## Running the Samples
 
