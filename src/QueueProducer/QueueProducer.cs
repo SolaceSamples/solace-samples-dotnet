@@ -103,7 +103,7 @@ namespace Tutorial
                 };
                 // Provision it, and do not fail if it already exists
                 session.Provision(queue, endpointProps,
-                    ProvisionFlag.IgnoreErrorIfEndpointAlreadyExists & ProvisionFlag.WaitForConfirm, null);
+                    ProvisionFlag.IgnoreErrorIfEndpointAlreadyExists | ProvisionFlag.WaitForConfirm, null);
                 Console.WriteLine("Queue '{0}' has been created and provisioned.", queueName);
 
                 // Create the message
