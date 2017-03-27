@@ -43,7 +43,15 @@ As with other tutorials, this tutorial will connect to the default message VPN o
 
 ## Obtaining the Solace API
 
-This tutorial depends on you having the Solace C# API downloaded and available. The Solace C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples. The instructions in this tutorial assume you have downloaded the C# API library and unpacked it to a known location. If your environment differs then adjust the build instructions appropriately.
+This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project.
+
+The SolClient for .NET can be downloaded and installed via nuget.org or manually.
+
+For the **nuget.org** option use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project. It contains the required libraries and brief API documentation.
+
+For the **manual** option download it [from here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+
+The instructions in this tutorial assume you successfully downloaded and installed the SolClient for .NET. If your environment differs then adjust the build instructions appropriately.
 
 ## Connection setup
 
