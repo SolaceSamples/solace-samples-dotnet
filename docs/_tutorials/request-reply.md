@@ -53,7 +53,15 @@ For direct messages however, this is simplified through the use of the `Requesto
 
 This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples]({{ site.links-get-started }}){:target="_top"}.
 
-To successfully build the samples you must have the C# API downloaded and available. The C# API library can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. The C# API is distributed as a zip file containing the required libraries, API documentation, and examples.
+To successfully build the samples you must have the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project.
+
+The SolClient for .NET can be downloaded and installed via nuget.org or manually.
+
+For the **nuget.org** option use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project. It contains the required libraries and brief API documentation.
+
+For the **manual** option download it [from here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+
+The instructions in this tutorial assume you successfully downloaded and installed the SolClient for .NET. If your environment differs then adjust the build instructions appropriately.
 
 At the end, this tutorial walks through downloading and running the sample from source.
 
