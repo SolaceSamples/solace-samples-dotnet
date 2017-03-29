@@ -35,6 +35,32 @@ The goal of this tutorial is to understand the following:
     1.  How to detect a request expecting a reply
     2.  How to generate a reply message
 
+## Obtaining the Solace API
+
+This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
+
+Here are a few easy ways to get this API.
+
+### Get the API: Using nuget.org
+
+Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
+
+The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
+
+Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
+
+### Get the API: Using the Solace Developer Portal
+
+The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+
+You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
+
+Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
+
+## Trying it yourself
+
+This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples]({{ site.links-get-started }}){:target="_top"}.
+
 ## Overview
 
 Request-reply messaging is supported by the Solace message router for all delivery modes. For direct messaging, the Solace APIs provide the Requestor object for convenience. This object makes it easy to send a request and wait for the reply message. It is a convenience object that makes use of the API provided “inbox” topic that is automatically created for each Solace client and automatically correlates requests with replies using the message correlation ID. (See Message Correlation below for more details). On the reply side another convenience method enables applications to easily send replies for specific requests. Direct messaging request reply is the delivery mode that is illustrated in this sample.
@@ -48,22 +74,6 @@ For request-reply messaging to be successful it must be possible for the request
 ![]({{ site.baseurl }}/images/Request-Reply_diagram-1.png)
 
 For direct messages however, this is simplified through the use of the `Requestor` object as shown in this sample.
-
-## Trying it yourself
-
-This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples]({{ site.links-get-started }}){:target="_top"}.
-
-To successfully build the samples you must have the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project.
-
-The SolClient for .NET can be downloaded and installed via nuget.org or manually.
-
-For the **nuget.org** option use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project. It contains the required libraries and brief API documentation.
-
-For the **manual** option download it [from here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
-
-The instructions in this tutorial assume you successfully downloaded and installed the SolClient for .NET. If your environment differs then adjust the build instructions appropriately.
-
-At the end, this tutorial walks through downloading and running the sample from source.
 
 ## Connecting a session to the message router
 
@@ -127,7 +137,7 @@ private void HandleRequestMessage(object source, MessageEventArgs args)
             else
             {
                 Console.WriteLine("Reply failed, return code: {0}", returnCode);
- 
+
             }
             // finish the program
             waitEventWaitHandle.Set();
@@ -186,9 +196,9 @@ Build it from Microsoft Visual Studio or command line:
 > csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:BasicRequestor.exe BasicRequestor.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
+You need `SolaceSystems.Solclient.Messaging_64.dll` (or `SolaceSystems.Solclient.Messaging.dll`) at compile and runtime time and `libsolclient.dll` at runtime in the same directory where your source and executables are.
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
 
 ### Running the Sample
 
