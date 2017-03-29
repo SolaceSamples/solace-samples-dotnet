@@ -33,15 +33,25 @@ As with other tutorials, this tutorial will connect to the default message VPN o
 
 ## Obtaining the Solace API
 
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project.
+This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
 
-The SolClient for .NET can be downloaded and installed via nuget.org or manually.
+Here are a few easy ways to get this API.
 
-For the **nuget.org** option use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project. It contains the required libraries and brief API documentation.
+### Get the API: Using nuget.org
 
-For the **manual** option download it [from here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
 
-The instructions in this tutorial assume you successfully downloaded and installed the SolClient for .NET. If your environment differs then adjust the build instructions appropriately.
+The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
+
+Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
+
+### Get the API: Using the Solace Developer Portal
+
+The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+
+You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
+
+Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
 
 ## Message Acknowledgement Correlation
 
@@ -84,9 +94,9 @@ SessionProperties sessionProps = new SessionProperties()
     UserName = UserName,
     ReconnectRetries = DefaultReconnectRetries
 };
- 
+
 Console.WriteLine("Connecting as {0}@{1} on {2}...", UserName, VPNName, host);
- 
+
 // NOTICE HandleSessionEvent as session event handler
 using (ISession session = context.CreateSession(
    sessionProps, null, HandleSessionEvent))
@@ -106,7 +116,7 @@ using (ISession session = context.CreateSession(
 
 ## Adding Message Correlation on Send
 
-The [Persistence with Queues]({{ site.baseurl }}/persistence-with-queues) tutorial demonstrated how to send persistent messages using code very similar to the following. 
+The [Persistence with Queues]({{ site.baseurl }}/persistence-with-queues) tutorial demonstrated how to send persistent messages using code very similar to the following.
 
 ```csharp
 using (IMessage message = ContextFactory.Instance.CreateMessage())
@@ -114,7 +124,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
     message.Destination = queue;
     message.DeliveryMode = MessageDeliveryMode.Persistent;
     message.BinaryAttachment = Encoding.ASCII.GetBytes("Persistent Queue Tutorial");
- 
+
     Console.WriteLine("Sending message to queue {0}...", queueName);
     ReturnCode returnCode = session.Send(message);
     if (returnCode == ReturnCode.SOLCLIENT_OK)
@@ -135,16 +145,16 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
 {
     message.Destination = queue;
     message.DeliveryMode = MessageDeliveryMode.Persistent;
- 
+
     for (int i = 0; i &lt; TotalMessages; i++)
     {
         message.BinaryAttachment = Encoding.ASCII.GetBytes(
             string.Format("Confirmed Publish Tutorial! Message ID: {0}", i));
- 
+
         MsgInfo msgInfo = new MsgInfo(message, i);
         message.CorrelationKey = msgInfo;
         msgList.Add(msgInfo);
- 
+
         Console.WriteLine("Sending message to queue {0}...", queueName);
         ReturnCode returnCode = session.Send(message);
         if (returnCode != ReturnCode.SOLCLIENT_OK)
@@ -198,9 +208,9 @@ Build it from Microsoft Visual Studio or command line:
 csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: ConfirmedPublish.exe ConfirmedPublish.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
+You need `SolaceSystems.Solclient.Messaging_64.dll` (or `SolaceSystems.Solclient.Messaging.dll`) at compile and runtime time and `libsolclient.dll` at runtime in the same directory where your source and executables are.
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
 
 ### Sample Output
 

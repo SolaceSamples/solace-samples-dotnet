@@ -35,15 +35,25 @@ As with other tutorials, this tutorial will connect to the default message VPN o
 
 ## Obtaining the Solace API
 
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project.
+This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
 
-The SolClient for .NET can be downloaded and installed via nuget.org or manually.
+Here are a few easy ways to get this API.
 
-For the **nuget.org** option use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project. It contains the required libraries and brief API documentation.
+### Get the API: Using nuget.org
 
-For the **manual** option download it [from here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
 
-The instructions in this tutorial assume you successfully downloaded and installed the SolClient for .NET. If your environment differs then adjust the build instructions appropriately.
+The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
+
+Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
+
+### Get the API: Using the Solace Developer Portal
+
+The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+
+You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
+
+Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
 
 ## Provisioning a Queue through the API
 
@@ -58,9 +68,9 @@ Durable endpoints are not auto created on Solace message routers. However there 
 
 Using the Solace APIs to provision an endpoint can be a convenient way of getting started quickly without needing to become familiar with the management interface. This is why it is used in this tutorial. However it should be noted that the management interface provides more options to control the queue properties. So generally it becomes the preferred method over time.
 
-Provisioning an endpoint through the API requires the “Guaranteed Endpoint Create” permission in the client-profile. You can confirm this is enabled by looking at the client profile in SolAdmin. If it is correctly set you will see the following: 
+Provisioning an endpoint through the API requires the “Guaranteed Endpoint Create” permission in the client-profile. You can confirm this is enabled by looking at the client profile in SolAdmin. If it is correctly set you will see the following:
 
-![persistence-dotnet-1]({{ site.baseurl }}/images/persistence-tutorial-image-3.png)  
+![persistence-dotnet-1]({{ site.baseurl }}/images/persistence-tutorial-image-3.png)
 
 Provisioning the queue involves three steps.
 
@@ -91,9 +101,9 @@ The `WaitForConfirm` flags tells the API to wait for the provision complete conf
 
 ## Sending a message to a queue
 
-Now it is time to send a message to the queue.  
+Now it is time to send a message to the queue.
 
-![sending-message-to-queue]({{ site.baseurl }}/images/sending-message-to-queue.png) 
+![sending-message-to-queue]({{ site.baseurl }}/images/sending-message-to-queue.png)
 
 There is really no difference in the actual calls to the ISession object instance when sending a persistent message as compared to a direct message shown in the publish/subscribe tutorial. The difference in the persistent message is that the Solace message router will acknowledge the message once it is successfully stored on the message router.
 
@@ -122,7 +132,7 @@ At this point the message to the Solace message router is sent and it will be wa
 
 ## Receiving a message from a queue
 
-Now it is time to receive the messages sent to your queue.  
+Now it is time to receive the messages sent to your queue.
 
 ![receiving-message-from-queue]({{ site.baseurl }}/images/receiving-message-from-queue.png)
 
@@ -182,9 +192,9 @@ Build it from Microsoft Visual Studio or command line:
 > csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out: QueueConsumer.exe QueueConsumer.cs
 ```
 
-You need `SolaceSystems.Solclient.Messaging_64.dll` at compile and runtime time and `libsolclient_64.dll` at runtime in the same directory where your source and executables are. 
+You need `SolaceSystems.Solclient.Messaging_64.dll` (or `SolaceSystems.Solclient.Messaging.dll`) at compile and runtime time and `libsolclient.dll` at runtime in the same directory where your source and executables are.
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution. 
+Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
 
 ### Sample Output
 
