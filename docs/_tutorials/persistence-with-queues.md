@@ -92,7 +92,7 @@ EndpointProperties endpointProps = new EndpointProperties()
 };
 
 session.Provision(queue, endpointProps,
-    ProvisionFlag.IgnoreErrorIfEndpointAlreadyExists & ProvisionFlag.WaitForConfirm, null);
+    ProvisionFlag.IgnoreErrorIfEndpointAlreadyExists | ProvisionFlag.WaitForConfirm, null);
 ```
 
 The `IgnoreErrorIfEndpointAlreadyExists` flags signals to the API that the application is tolerate of the queue already existing even if it’s properties are different than those specified in the endpoint properties.
