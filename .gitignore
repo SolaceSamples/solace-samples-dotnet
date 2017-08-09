@@ -5,3 +5,4 @@ _site
 .DS_Store
 docs/_site
 *.bak
+.idea
