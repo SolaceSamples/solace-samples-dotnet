@@ -2,12 +2,10 @@
 layout: tutorials
 title: Topic to Queue Mapping
 summary: Learn how to map existing topics to Solace queues.
-icon: topic-to-queue-mapping.png
+icon: I_dev_topic2q.svg
 ---
 
 This tutorial builds on the basic concepts introduced in the [Persistence with Queues tutorial]({{ site.baseurl }}/persistence-with-queues) and will show you how to make use of one of Solace’s advanced queueing features called “Topic to Queue Mapping.”
-
-![topic-to-queue-mapping]({{ site.baseurl }}/images/topic-to-queue-mapping.png)
 
 In addition to spooling messages published directly to the queue, it is possible to add one or more topic subscriptions to a durable queue so that messages published to those topics are also delivered to and spooled by the queue. This is a powerful feature that enables queues to participate equally in point to point and publish / subscribe messaging models. More details about the [“Topic to Queue Mapping” feature here]({{ site.docs-topic-queue}}){:target="_top"}.
 

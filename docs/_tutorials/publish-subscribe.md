@@ -2,12 +2,10 @@
 layout: tutorials
 title: Publish/Subscribe
 summary: Learn the basis for any publish / subscribe message exchange
-icon: publish-subscribe.png
+icon: I_dev_P+S.svg
 ---
 
 This tutorial will introduce you to the fundamentals of the Solace API by connecting a client, adding a topic subscription and sending a message matching this topic subscription. This forms the basis for any publish / subscribe message exchange illustrated here:
-
-![]({{ site.baseurl }}/images/publish-subscribe.png)
 
 ## Assumptions
 
