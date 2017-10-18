@@ -216,7 +216,7 @@ Start the `ConfirmedPublish` to send messages to the queue, passing your Solace 
 
 ```
 $ ./ConfirmedPublish HOST
-Solace Corp Messaging API Tutorial, Copyright 2008-2017 Solace Corp, Inc.
+Solace Messaging API Tutorial, Copyright 2008-2017 Solace Corp, Inc.
 Connecting as tutorial@default on HOST...
 Received session event SessionEventArgs=[info: host 'HOST', IP HOST:55555 (host 1 of 1) (host connection attempt 1 of 1) (total connection attempt 1 of 1) , ResponseCode: 0 , Event: UpNotice].
 Session successfully connected.
