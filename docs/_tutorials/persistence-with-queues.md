@@ -2,12 +2,10 @@
 layout: tutorials
 title: Persistence with Queues
 summary: Learn how to send and receive messages in a point-to-point fashion.
-icon: persistence-tutorial.png
+icon: I_dev_Persistent.svg
 ---
 
 This tutorial builds on the basic concepts introduced in the [publish/subscribe tutorial]({{ site.baseurl }}/publish-subscribe), and will show you how to send and receive persistent messages from a Solace message router queue in a point to point fashion.
-
-![persistence-tutorial]({{ site.baseurl }}/images/persistence-tutorial.png)
 
 ## Assumptions
 

@@ -2,12 +2,10 @@
 layout: tutorials
 title: Confirmed Delivery
 summary: Learn how to confirm that your messages are received by a Solace message router.
-icon: confirmed-delivery.png
+icon: I_dev_confirm.svg
 ---
 
 This tutorial builds on the basic concepts introduced in [Persistence with Queues]({{ site.baseurl }}/persistence-with-queues) tutorial and will show you how to properly process publisher acknowledgements. Once an acknowledgement for a message has been received and processed, you have confirmed your persistent messages have been properly accepted by the Solace message router and therefore can be guaranteed of no message loss.
-
-![confirmed-delivery]({{ site.baseurl }}/images/confirmed-delivery.png)
 
 ## Assumptions
 
@@ -218,7 +216,7 @@ Start the `ConfirmedPublish` to send messages to the queue, passing your Solace 
 
 ```
 $ ./ConfirmedPublish HOST
-Solace Systems Messaging API Tutorial, Copyright 2008-2015 Solace Systems, Inc.
+Solace Messaging API Tutorial, Copyright 2008-2017 Solace Corp, Inc.
 Connecting as tutorial@default on HOST...
 Received session event SessionEventArgs=[info: host 'HOST', IP HOST:55555 (host 1 of 1) (host connection attempt 1 of 1) (total connection attempt 1 of 1) , ResponseCode: 0 , Event: UpNotice].
 Session successfully connected.
@@ -252,4 +250,3 @@ Finished.
 You have now successfully sent persistent messages to a Solace router and confirmed its receipt by correlating the acknowledgement.
 
 If you have any issues sending and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.
-

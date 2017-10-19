@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TopicQueueProducer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Solace Systems")]
+[assembly: AssemblyCompany("Solace Corp")]
 [assembly: AssemblyProduct("Tutorial")]
-[assembly: AssemblyCopyright("Copyright © Solace Systems 2015")]
+[assembly: AssemblyCopyright("Copyright © Solace Corp 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
