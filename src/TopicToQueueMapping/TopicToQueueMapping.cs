@@ -37,6 +37,7 @@ namespace Tutorial
     {
         string VPNName { get; set; }
         string UserName { get; set; }
+        string Password { get; set; }
 
         const int DefaultReconnectRetries = 3;
         const int TotalMessages = 5;
@@ -71,6 +72,7 @@ namespace Tutorial
                 Host = host,
                 VPNName = VPNName,
                 UserName = UserName,
+                Password = Password,
                 ReconnectRetries = DefaultReconnectRetries,
                 IgnoreDuplicateSubscriptionError = true
             };
@@ -245,16 +247,23 @@ namespace Tutorial
         #region Main
         static void Main(string[] args)
         {
-            if ((args.Length < 1) || string.IsNullOrWhiteSpace(args[0]))
+            if (args.Length < 3)
             {
-                Console.WriteLine("Please provide a parameter: non-empty value for the Solace messaging router host name or IP address, e.g. \"TopicToQueueMapping 192.168.1.111\"");
+                Console.WriteLine("Usage: TopicPublisher <host> <username>@<vpnname> <password>");
+                Environment.Exit(1);
+            }
+
+            string[] split = args[1].Split('@');
+            if (split.Length != 2)
+            {
+                Console.WriteLine("Usage: TopicPublisher <host> <username>@<vpnname> <password>");
                 Environment.Exit(1);
             }
 
             string host = args[0]; // Solace messaging router host name or IP address
-
-            const string defaultVPNName = "default"; // Solace messaging router VPN name
-            const string defaultUsername = "tutorial"; // client username on the Solace messaging router VPN
+            string username = split[0];
+            string vpnname = split[1];
+            string password = args[2];
 
             // Initialize Solace Systems Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
@@ -271,8 +280,9 @@ namespace Tutorial
                 // Create the application
                 using (TopicToQueueMapping topicToQueueMapping = new TopicToQueueMapping()
                 {
-                    VPNName = defaultVPNName,
-                    UserName = defaultUsername
+                    VPNName = vpnname,
+                    UserName = username,
+                    Password = password
                 })
                 {
                     // Run the application within the context and against the host
