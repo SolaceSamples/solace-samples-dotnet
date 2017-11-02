@@ -1,8 +1,11 @@
 ---
 layout: tutorials
 title: Confirmed Delivery
-summary: Learn how to confirm that your messages are received by a Solace message router.
+summary: Learn how to confirm your messages are delivered to Solace messaging.
 icon: I_dev_confirm.svg
+links:
+    - label: ConfirmedPublish.cs
+      link: /blob/master/src/ConfirmedDelivery/ConfirmedPublish.cs
 ---
 
 This tutorial builds on the basic concepts introduced in [Persistence with Queues]({{ site.baseurl }}/persistence-with-queues) tutorial and will show you how to properly process publisher acknowledgements. Once an acknowledgement for a message has been received and processed, you have confirmed your persistent messages have been properly accepted by the Solace message router and therefore can be guaranteed of no message loss.
@@ -12,12 +15,16 @@ This tutorial builds on the basic concepts introduced in [Persistence with Queue
 This tutorial assumes the following:
 
 *   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
-*   You have access to a running Solace message router with the following configuration:
-    *   Enabled message VPN configured for guaranteed messaging support.
-    *   Enabled client username.
+*   You have access to Solace messaging with the following configuration details:
+    *   Connectivity information for a Solace message-VPN configured for guaranteed messaging support
+    *   Enabled client username and password
     *   Client-profile enabled with guaranteed messaging permissions.
 
-One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the "default" message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
+{% if jekyll.environment == 'solaceCloud' %}
+One simple way to get access to Solace messaging quickly is to create a messaging service in Solace Cloud [as outlined here]({{ site.links-solaceCloud-setup}}){:target="_top"}. You can find other ways to get access to Solace messaging on the [home page]({{ site.baseurl }}/) of these tutorials.
+{% else %}
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will with the “default” message VPN configured and ready for guaranteed messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration adapt the tutorial appropriately to match your configuration.
+{% endif %}
 
 ## Goals
 
@@ -25,35 +32,16 @@ The goal of this tutorial is to understand the following:
 
 *  How to properly handle persistent message acknowledgements on message send.
 
-## Solace message router properties
-
-As with other tutorials, this tutorial will connect to the default message VPN of a Solace VMR which has authentication disabled. So the only required information to proceed is the Solace VMR host string which this tutorial accepts as an argument.
-
-## Obtaining the Solace API
-
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
-
-Here are a few easy ways to get this API.
-
-### Get the API: Using nuget.org
-
-Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
-
-The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
-
-Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
-
-### Get the API: Using the Solace Developer Portal
-
-The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
-
-You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
-
-Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
+{% if jekyll.environment == 'solaceCloud' %}
+  {% include solaceMessaging-cloud.md %}
+{% else %}
+    {% include solaceMessaging.md %}
+{% endif %}  
+{% include solaceApi.md %}
 
 ## Message Acknowledgement Correlation
 
-In order send fully persistent messages to a Solace message router with no chance of message loss, it is absolutely necessary to properly process the acknowledgements that come back from the Solace message router. These acknowledgements will let you know if the message was accepted by the Solace message router or if it was rejected. If it is rejected, the acknowledgement will also contain exact details of why it was rejected. For example, you may not have permission to send persistent messages or queue destination may not exist etc.
+In order send fully persistent messages to a Solace messaging with no chance of message loss, it is absolutely necessary to properly process the acknowledgements that come back from the Solace message router. These acknowledgements will let you know if the message was accepted by the Solace message router or if it was rejected. If it is rejected, the acknowledgement will also contain exact details of why it was rejected. For example, you may not have permission to send persistent messages or queue destination may not exist etc.
 
 In order to properly handle message acknowledgements it is also important to know which application event or message is being acknowledged. In other words, applications often need some application context along with the acknowledgement from the Solace message router to properly process the business logic on their end.
 
@@ -90,6 +78,7 @@ SessionProperties sessionProps = new SessionProperties()
     Host = host,
     VPNName = VPNName,
     UserName = UserName,
+    Password = Password,
     ReconnectRetries = DefaultReconnectRetries
 };
 
@@ -194,11 +183,13 @@ public void HandleSessionEvent(object sender, SessionEventArgs args)
 
 Combining the example source code show above results in the following source code files:
 
-*   [ConfirmedPublish.cs]({{ site.repository }}/blob/master/src/ConfirmedDelivery/ConfirmedPublish.cs){:target="_blank"}
+<ul>
+{% for item in page.links %}
+<li><a href="{{ site.repository }}{{ item.link }}" target="_blank">{{ item.label }}</a></li>
+{% endfor %}
+</ul>
 
 ### Building
-
-Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
@@ -212,13 +203,13 @@ Both DLLs are part of the Solace C#/.NET API distribution and located in `solcli
 
 ### Sample Output
 
-Start the `ConfirmedPublish` to send messages to the queue, passing your Solace messaging router host name (or IP address) as parameter and see confirmations.
+Start the `ConfirmedPublish` to send messages to the queue, passing your Solace messaging router connection properties as parameters and see confirmations.
 
 ```
-$ ./ConfirmedPublish HOST
+$ ./ConfirmedPublish <host> <username>@<vpnname> <password>
 Solace Messaging API Tutorial, Copyright 2008-2017 Solace Corp, Inc.
-Connecting as tutorial@default on HOST...
-Received session event SessionEventArgs=[info: host 'HOST', IP HOST:55555 (host 1 of 1) (host connection attempt 1 of 1) (total connection attempt 1 of 1) , ResponseCode: 0 , Event: UpNotice].
+Connecting as <host>@<vpname> on <host>...
+Received session event SessionEventArgs=[info: host '<host>', IP HOST:55555 (host 1 of 1) (host connection attempt 1 of 1) (total connection attempt 1 of 1) , ResponseCode: 0 , Event: UpNotice].
 Session successfully connected.
 Attempting to provision the queue 'Q/tutorial'...
 Queue 'Q/tutorial' has been created and provisioned.
