@@ -3,6 +3,11 @@ layout: tutorials
 title: Request/Reply
 summary: Learn how to set up request/reply messaging.
 icon: I_dev_R+R.svg
+links:
+    - label: BasicRequestor.cs
+      link: /blob/master/src/BasicRequestor/BasicRequestor.cs
+    - label: BasicReplier.cs
+      link: /blob/master/src/BasicReplier/BasicReplier.cs
 ---
 
 
@@ -13,9 +18,15 @@ This tutorial outlines both roles in the request-response message exchange patte
 This tutorial assumes the following:
 
 *   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
-*   You have access to a running Solace message router with the following configuration:
-    *   Enabled message VPN
-    *   Enabled client username
+*   You have access to Solace messaging with the following configuration details:
+    *   Connectivity information for a Solace message-VPN
+    *   Enabled client username and password
+
+{% if jekyll.environment == 'solaceCloud' %}
+One simple way to get access to Solace messaging quickly is to create a messaging service in Solace Cloud [as outlined here]({{ site.links-solaceCloud-setup}}){:target="_top"}. You can find other ways to get access to Solace messaging on the [home page]({{ site.baseurl }}/) of these tutorials.
+{% else %}
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will with the “default” message VPN configured and ready for guaranteed messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration adapt the tutorial appropriately to match your configuration.
+{% endif %}
 
 One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
 
@@ -33,32 +44,6 @@ The goal of this tutorial is to understand the following:
     1.  How to detect a request expecting a reply
     2.  How to generate a reply message
 
-## Obtaining the Solace API
-
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
-
-Here are a few easy ways to get this API.
-
-### Get the API: Using nuget.org
-
-Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
-
-The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
-
-Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
-
-### Get the API: Using the Solace Developer Portal
-
-The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
-
-You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
-
-Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
-
-## Trying it yourself
-
-This tutorial is available in [GitHub]({{ site.repository }}){:target="_blank"} along with the other [Solace Developer Getting Started Examples]({{ site.links-get-started }}){:target="_top"}.
-
 ## Overview
 
 Request-reply messaging is supported by the Solace message router for all delivery modes. For direct messaging, the Solace APIs provide the Requestor object for convenience. This object makes it easy to send a request and wait for the reply message. It is a convenience object that makes use of the API provided “inbox” topic that is automatically created for each Solace client and automatically correlates requests with replies using the message correlation ID. (See Message Correlation below for more details). On the reply side another convenience method enables applications to easily send replies for specific requests. Direct messaging request reply is the delivery mode that is illustrated in this sample.
@@ -73,9 +58,12 @@ For request-reply messaging to be successful it must be possible for the request
 
 For direct messages however, this is simplified through the use of the `Requestor` object as shown in this sample.
 
-## Connecting a session to the message router
-
-As with other tutorials, this tutorial requires an instance of ISession connected to the default message VPN of a Solace VMR which has authentication disabled. So the only required information to proceed is the Solace VMR host string which this tutorial accepts as an argument. Connect the session as outlined in the [publish/subscribe tutorial]({{ site.baseurl }}/publish-subscribe).
+{% if jekyll.environment == 'solaceCloud' %}
+  {% include solaceMessaging-cloud.md %}
+{% else %}
+    {% include solaceMessaging.md %}
+{% endif %}  
+{% include solaceApi.md %}
 
 ## Making a request
 
@@ -171,8 +159,12 @@ else
 
 The full source code for this example is available in [GitHub]({{ site.repository }}){:target="_blank"}. If you combine the example source code shown above results in the following source:
 
-*   [BasicRequestor.cs]({{ site.repository }}/blob/master/src/BasicRequestor/BasicRequestor.cs){:target="_blank"}
-*   [BasicReplier.cs]({{ site.repository }}/blob/master/src/BasicReplier/BasicReplier.cs){:target="_blank"}
+<ul>
+{% for item in page.links %}
+<li><a href="{{ site.repository }}{{ item.link }}" target="_blank">{{ item.label }}</a></li>
+{% endfor %}
+</ul>
+
 
 ### Getting the Source
 
@@ -184,8 +176,6 @@ cd {{ site.baseurl | remove: '/'}}
 ```
 
 ### Building
-
-Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
@@ -200,11 +190,11 @@ Both DLLs are part of the Solace C#/.NET API distribution and located in `solcli
 
 ### Running the Sample
 
-First start the BasicReplier.exe so that it is up and listening for requests. Then you can use the BasicRequestor.exe sample to send requests and receive replies. Pass your Solace messaging router host name (or IP address) as parameter.
+First start the BasicReplier.exe so that it is up and listening for requests. Then you can use the BasicRequestor.exe sample to send requests and receive replies. Pass your Solace messaging router connection properties as parameters.
 
 ```
-$ ./BasicReplier HOST
-Connecting as tutorial@default on HOST...
+$ ./BasicReplier <host> <username>@<vpnname> <password>
+Connecting as <username>@<vpnname> on <host>...
 Session successfully connected.
 Waiting for a request to come in...
 Received request.
@@ -215,8 +205,8 @@ Finished.
 ```
 
 ```
-$ ./BasicRequestor HOST
-Connecting as tutorial@default on HOST...
+$ ./BasicRequestor <host> <username>@<vpnname> <password>
+Connecting as <username>@<vpnname> on <host>...
 Session successfully connected.
 Sending request...
 Received reply: Sample Reply

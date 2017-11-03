@@ -3,6 +3,12 @@ layout: tutorials
 title: Persistence with Queues
 summary: Learn how to send and receive messages in a point-to-point fashion.
 icon: I_dev_Persistent.svg
+links:
+    - label: QueueProducer.cs
+      link: /blob/master/src/QueueProducer/QueueProducer.cs
+    - label: QueueConsumber.cs
+      link: /blob/master/src/QueueConsumer/QueueConsumer.cs
+
 ---
 
 This tutorial builds on the basic concepts introduced in the [publish/subscribe tutorial]({{ site.baseurl }}/publish-subscribe), and will show you how to send and receive persistent messages from a Solace message router queue in a point to point fashion.
@@ -12,12 +18,16 @@ This tutorial builds on the basic concepts introduced in the [publish/subscribe 
 This tutorial assumes the following:
 
 *   You are familiar with Solace [core concepts]({{ site.docs-core-concepts }}){:target="_top"}.
-*   You have access to a running Solace message router with the following configuration:
-    *   Enabled message VPN
-    *   Enabled client username
+*   You have access to Solace messaging with the following configuration details:
+    *   Connectivity information for a Solace message-VPN configured for guaranteed messaging support
+    *   Enabled client username and password
     *   Client-profile enabled with guaranteed messaging permissions.
 
-One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will run with the “default” message VPN configured and ready for messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration, adapt the instructions to match your configuration.
+{% if jekyll.environment == 'solaceCloud' %}
+One simple way to get access to Solace messaging quickly is to create a messaging service in Solace Cloud [as outlined here]({{ site.links-solaceCloud-setup}}){:target="_top"}. You can find other ways to get access to Solace messaging on the [home page]({{ site.baseurl }}/) of these tutorials.
+{% else %}
+One simple way to get access to a Solace message router is to start a Solace VMR load [as outlined here]({{ site.docs-vmr-setup }}){:target="_top"}. By default the Solace VMR will with the “default” message VPN configured and ready for guaranteed messaging. Going forward, this tutorial assumes that you are using the Solace VMR. If you are using a different Solace message router configuration adapt the tutorial appropriately to match your configuration.
+{% endif %}
 
 ## Goals
 
@@ -27,31 +37,12 @@ The goal of this tutorial is to understand the following:
 *   How to send a persistent message to a Solace queue
 *   How to bind to this queue and receive a persistent message
 
-## Solace message router properties
-
-As with other tutorials, this tutorial will connect to the default message VPN of a Solace VMR which has authentication disabled. So the only required information to proceed is the Solace VMR host string which this tutorial accepts as an argument.
-
-## Obtaining the Solace API
-
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
-
-Here are a few easy ways to get this API.
-
-### Get the API: Using nuget.org
-
-Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
-
-The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
-
-Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
-
-### Get the API: Using the Solace Developer Portal
-
-The SolClient for .NET can be [downloaded here]({{ site.links-downloads }}){:target="_top"}. That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
-
-You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
-
-Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
+{% if jekyll.environment == 'solaceCloud' %}
+  {% include solaceMessaging-cloud.md %}
+{% else %}
+    {% include solaceMessaging.md %}
+{% endif %}  
+{% include solaceApi.md %}
 
 ## Provisioning a Queue through the API
 
@@ -176,12 +167,13 @@ private void HandleMessageEvent(object source, MessageEventArgs args)
 
 Combining the example source code show above results in the following source code files:
 
-*   [QueueProducer.cs]({{ site.repository }}/blob/master/src/QueueProducer/QueueProducer.cs){:target="_blank"}
-*   [QueueConsumer.cs]({{ site.repository }}/blob/master/src/QueueConsumer/QueueConsumer.cs){:target="_blank"}
+<ul>
+{% for item in page.links %}
+<li><a href="{{ site.repository }}{{ item.link }}" target="_blank">{{ item.label }}</a></li>
+{% endfor %}
+</ul>
 
 ### Building
-
-Modify the example source code to reflect your Solace messaging router message-vpn name and credentials for connection (client username and optional password) as needed.
 
 Build it from Microsoft Visual Studio or command line:
 
@@ -196,11 +188,11 @@ Both DLLs are part of the Solace C#/.NET API distribution and located in `solcli
 
 ### Sample Output
 
-First start the `QueueProducer` to send a message to the queue. Then you can use the `QueueConsumer` sample to receive the messages from the queue. Pass your Solace messaging router host name (or IP address) as parameter.
+First start the `QueueProducer` to send a message to the queue. Then you can use the `QueueConsumer` sample to receive the messages from the queue. Pass your Solace messaging router connection properties as parameters.
 
 ```
-$ ./QueueProducer HOST
-Connecting as tutorial@default on HOST...
+$ ./QueueProducer <host> <username>@<vpnname> <password>
+Connecting as <username>@<vpnname> on <host>...
 Session successfully connected.
 Attempting to provision the queue 'Q/tutorial'...
 Queue 'Q/tutorial' has been created and provisioned.
@@ -210,8 +202,8 @@ Finished.
 ```
 
 ```
-$ ./QueryConsumer HOST
-Connecting as tutorial@default on HOST...
+$ ./QueryConsumer <host> <username>@<vpnname> <password>
+Connecting as <username>@<vpnname> on <host>...
 Session successfully connected.
 Attempting to provision the queue 'Q/tutorial'...
 Queue 'Q/tutorial' has been created and provisioned.

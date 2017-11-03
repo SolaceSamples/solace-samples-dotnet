@@ -10,6 +10,7 @@ repository: https://github.com/SolaceSamples/solace-samples-dotnet
 links-downloads: http://dev.solace.com/downloads/
 links-community: http://dev.solace.com/community/
 links-get-started: http://dev.solace.com/get-started/dotnet-tutorials/
+links-solaceCloud-setup: http://cloud.solace.com/create-messaging-service/
 docs-vmr-setup: http://docs.solace.com/Solace-VMR-Set-Up/Setting-Up-VMRs.htm
 docs-core-concepts: http://docs.solace.com/Features/Core-Concepts.htm
 docs-endpoints: http://docs.solace.com/Features/Core-Concepts.htm#endpoints
