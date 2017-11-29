@@ -6,7 +6,7 @@ icon: I_dev_Persistent.svg
 links:
     - label: QueueProducer.cs
       link: /blob/master/src/QueueProducer/QueueProducer.cs
-    - label: QueueConsumber.cs
+    - label: QueueConsumer.cs
       link: /blob/master/src/QueueConsumer/QueueConsumer.cs
 
 ---
@@ -165,7 +165,7 @@ private void HandleMessageEvent(object source, MessageEventArgs args)
 
 ## Summarizing
 
-Combining the example source code show above results in the following source code files:
+Combining the example source code shown above results in the following source code files:
 
 <ul>
 {% for item in page.links %}

@@ -181,7 +181,7 @@ public void HandleSessionEvent(object sender, SessionEventArgs args)
 
 ## Summarizing
 
-Combining the example source code show above results in the following source code files:
+Combining the example source code shown above results in the following source code files:
 
 <ul>
 {% for item in page.links %}
