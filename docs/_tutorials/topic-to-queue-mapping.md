@@ -113,7 +113,7 @@ In this case the tutorial requires permission to send and receive guaranteed mes
 
 ## Adding a Subscription to a Queue
 
-In order to enable a queue to participate in publish/subscribe messaging, you need to add topic subscriptions to the queue to attract messages. You do this from the `ISession` object instance using the `Subscribe` method. The queue destination is passed as the first argument and then topic subscription to add and any flags. This example asks the API to block until the subscription is confirmed to be on the Solace message router. The subscription added in this tutorial is `Q/tutorial/topicToQueueMapping`.
+In order to enable a queue to participate in publish/subscribe messaging, you need to add topic subscriptions to the queue to attract messages. You do this from the `ISession` object instance using the `Subscribe` method. The queue destination is passed as the first argument and then topic subscription to add and any flags. This example asks the API to block until the subscription is confirmed to be on the Solace message router. The subscription added in this tutorial is `T/mapped/topic/sample`.
 
 ```csharp
 ITopic tutorialTopic = ContextFactory.Instance.CreateTopic("T/mapped/topic/sample");
