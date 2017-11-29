@@ -41,13 +41,13 @@ The goal of this tutorial is to understand the following:
 
 ## Message Acknowledgement Correlation
 
-In order send fully persistent messages to a Solace messaging with no chance of message loss, it is absolutely necessary to properly process the acknowledgements that come back from the Solace message router. These acknowledgements will let you know if the message was accepted by the Solace message router or if it was rejected. If it is rejected, the acknowledgement will also contain exact details of why it was rejected. For example, you may not have permission to send persistent messages or queue destination may not exist etc.
+To send fully persistent messages to a Solace messaging with no chance of message loss, it is absolutely necessary to properly process the acknowledgements that come back from the Solace message router. These acknowledgements will let you know if the messages were accepted by the Solace message router or if they rejected. If a message is rejected, the acknowledgement will also contain exact details of why it was rejected. For example, you may not have permission to send persistent messages or queue destination may not exist etc.
 
-In order to properly handle message acknowledgements it is also important to know which application event or message is being acknowledged. In other words, applications often need some application context along with the acknowledgement from the Solace message router to properly process the business logic on their end.
+To properly handle message acknowledgements, it is also important to know which application event or message is being acknowledged. In other words, applications often need some application context along with the acknowledgement from the Solace message router to properly process the business logic on their end.
 
 The Solace C# API enables this through a callback in the form of the session event handler.
 
-This callback allows applications to attach a correlation object on message send and this correlation object is also returned in the acknowledgement. This allows applications to easily pass the application context to the acknowledgement, handling enabling proper correlation of messages sent and acknowledgements received.
+This callback allows applications to attach a correlation object on message send, and this correlation object is also returned in the acknowledgement. This allows applications to easily pass the application context to the acknowledgement, handling enabling proper correlation of messages sent and acknowledgements received.
 
 For the purposes of this tutorial, we will track message context using the following simple class. It will keep track of the result of the acknowledgements.
 
@@ -133,7 +133,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
     message.Destination = queue;
     message.DeliveryMode = MessageDeliveryMode.Persistent;
 
-    for (int i = 0; i &lt; TotalMessages; i++)
+    for (int i = 0; i < TotalMessages; i++)
     {
         message.BinaryAttachment = Encoding.ASCII.GetBytes(
             string.Format("Confirmed Publish Tutorial! Message ID: {0}", i));

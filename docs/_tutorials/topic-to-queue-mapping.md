@@ -130,7 +130,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
     message.Destination = tutorialTopic;
     message.DeliveryMode = MessageDeliveryMode.Persistent;
 
-    for (int i = 0; i &lt; TotalMessages; i++)
+    for (int i = 0; i < TotalMessages; i++)
     {
         message.BinaryAttachment = Encoding.ASCII.GetBytes(
             string.Format("Topic to Queue Mapping Tutorial! Message ID: {0}", i));
