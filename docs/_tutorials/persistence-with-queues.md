@@ -64,7 +64,7 @@ Provisioning an endpoint through the API requires the “Guaranteed Endpoint Cre
 Provisioning the queue involves three steps.
 
 1.  Obtaining IQueue interface instance representing the queue you wish to create.
-2.  Setting the properties that you wish for your queue. This examples permits consumption of messages and sets the queue type to exclusive. More details on queue permissions can be found in the [developer documentation]({{ site.docs-solace-apis }}){:target="_top"}.
+2.  Setting the properties that you wish for your queue. This examples permits consumption of messages and sets the queue type to exclusive. More details on queue permissions can be found under EndpointProperties.EndpointPermission Enumeration section in the [developer documentation]({{ site.docs-dotnet-api }}){:target="_top"}.
 3.  Provisioning the Queue on the Solace message router
 
 The following code shows you this for the queue named “Q/tutorial”.
@@ -84,7 +84,7 @@ session.Provision(queue, endpointProps,
     ProvisionFlag.IgnoreErrorIfEndpointAlreadyExists | ProvisionFlag.WaitForConfirm, null);
 ```
 
-The `IgnoreErrorIfEndpointAlreadyExists` flags signals to the API that the application is tolerate of the queue already existing even if it’s properties are different than those specified in the endpoint properties.
+The `IgnoreErrorIfEndpointAlreadyExists` flags signals to the API that the application is tolerate of the queue already existing.
 
 The `WaitForConfirm` flags tells the API to wait for the provision complete confirmation before exiting the `Provision` routine.
 
