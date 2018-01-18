@@ -21,6 +21,7 @@ docs-topic-queue: //docs.solace.com/Features/Core-Concepts.htm#topic-queue-mappi
 docs-dotnet: //docs.solace.com/Solace-Messaging-APIs/net-api-home.htm
 docs-client-profile: //docs.solace.com/Features/Core-Concepts.htm#client-profile
 docs-dotnet-api: //docs.solace.com/API-Developer-Online-Ref-Documentation/net/index.html
+
 solace-apis-dev:
   - value: //dev.solace.com/get-started/c-tutorials/
     name: C
