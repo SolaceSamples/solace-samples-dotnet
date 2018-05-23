@@ -7,8 +7,8 @@ repository: https://github.com/SolaceSamples/solace-samples-dotnet
 # Also see _includes/intro.html to customize the description which gets included in index.html.
 
 # Links
-hostname: solacecloud.staging.wpengine.com
-dev-hostname: solacesystems2.staging.wpengine.com
+hostname: cloud.solace.com
+dev-hostname: dev.solace.com
 links-downloads: //dev.solace.com/downloads/
 links-community: //dev.solace.com/community/
 links-get-started: //dev.solace.com/get-started/dotnet-tutorials/
