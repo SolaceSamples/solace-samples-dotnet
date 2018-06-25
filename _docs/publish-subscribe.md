@@ -31,8 +31,8 @@ The goal of this tutorial is to demonstrate the most basic messaging interaction
 1. How to build and send a message on a topic
 2. How to subscribe to a topic and receive a message
 
-{% include solaceMessaging.md %}
-{% include solaceApi.md %}
+{% include_relative assets/solaceMessaging.md %}
+{% include_relative assets/solaceApi.md %}
 
 For the purposes of this tutorial, you will connect to the default message VPN of a Solace VMR so the only required information to proceed is the Solace VMR host string which this tutorial accepts as an argument.
 
@@ -85,7 +85,7 @@ At this point your client is connected to the Solace message router. You can use
 
 This tutorial uses “Direct” messages which are at most once delivery messages. So first, let’s express interest in the messages by subscribing to a Solace topic. Then you can look at publishing a matching message and see it received.
 
-![]({{ site.baseurl }}/images/pub-sub-receiving-message-300x134.png)
+![]({{ site.baseurl }}/assets/images/pub-sub-receiving-message-300x134.png)
 
 With a session connected in the previous step, the next step is to create a message consumer. Message consumers enable the asynchronous receipt of messages through callbacks. These callbacks are defined in CSCSMP by the message receive delegate.
 
@@ -129,7 +129,7 @@ WaitEventWaitHandle.WaitOne();
 
 ## Sending a message
 
-![]({{ site.baseurl }}/images/pub-sub-sending-message-300x134.png)
+![]({{ site.baseurl }}/assets/images/pub-sub-sending-message-300x134.png)
 
 Now it is time to send a message to the waiting consumer.
 
