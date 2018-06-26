@@ -9,7 +9,7 @@ The "Getting Started" tutorials will get you up to speed and sending messages wi
 
 ## Contents
 
-This repository contains code and matching tutorial walk throughs for five different basic Solace messaging patterns. For a nice introduction to the Solace API and associated tutorials, check out the [tutorials home page](https://solacesamples.github.io/solace-samples-dotnet/).
+This repository contains code and matching tutorial walk throughs for five different basic Solace messaging patterns. For a nice introduction to the Solace API and associated tutorials, check out the [tutorials home page](https://dev.solace.com/samples/solace-samples-dotnet/).
 
 ## Obtaining the Solace API
 
@@ -62,7 +62,7 @@ $ ./TopicSubscriber HOST
 
 ```
 
-See the [tutorials](https://solacesamples.github.io/solace-samples-dotnet/) for more details.
+See the [tutorials](https://dev.solace.com/samples/solace-samples-dotnet/) for more details.
 
 ## Contributing
 
