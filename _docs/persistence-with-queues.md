@@ -111,7 +111,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
 }
 ```
 
-The message is transferred to the router asynchronously, but if all goes well, it will be waiting for your consumer on the queue. The [Confirmed Delivery tutorial]({{ site.baseurl }}/confirmed-delivery) shows how to make sure it gets there.
+The message is transferred to the Solace message router asynchronously, but if all goes well, it will be waiting for your consumer on the queue. The [Confirmed Delivery tutorial]({{ site.baseurl }}/confirmed-delivery) shows how to make sure it gets there.
 
 ## Receiving a message from a queue
 
@@ -210,6 +210,6 @@ Finished.
 
 You have now successfully connected a client, sent persistent messages to a queue and received and acknowledged them.
 
-Learn how to verify all messages arrive to the router in our next tutorial, [Confirmed Delivery.]({{ site.baseurl }}/confirmed-delivery)
+Learn how to verify all messages arrive to the Solace message router in our next tutorial, [Confirmed Delivery.]({{ site.baseurl }}/confirmed-delivery)
 
 If you have any issues sending and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.
