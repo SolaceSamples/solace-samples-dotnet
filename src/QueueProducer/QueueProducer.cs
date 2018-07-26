@@ -122,6 +122,7 @@ namespace Tutorial
                     ReturnCode returnCode = session.Send(message);
                     if (returnCode == ReturnCode.SOLCLIENT_OK)
                     {
+                        // Delivery not yet confirmed. See ConfirmedPublish.cs
                         Console.WriteLine("Done.");
                     }
                     else

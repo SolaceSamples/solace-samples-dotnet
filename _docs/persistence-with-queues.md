@@ -87,7 +87,7 @@ Now it is time to send a message to the queue.
 
 ![sending-message-to-queue]({{ site.baseurl }}/assets/images/sending-message-to-queue.png)
 
-There is really no difference in the actual calls to the ISession object instance when sending a persistent message as compared to a direct message shown in the publish/subscribe tutorial. The difference in the persistent message is that the Solace message router will acknowledge the message once it is successfully stored on the message router.
+In the simplest case, there is really no difference in the actual calls to the ISession object instance when sending a persistent message as compared to a direct message shown in the publish/subscribe tutorial. The difference in the persistent message is that the Solace message router will acknowledge the message once it is successfully stored on the message router. The next tutorial titled [Confirmed Delivery]({{ site.baseurl }}/confirmed-delivery) demonstrates the proper handling of those acknowlegements.
 
 To send a message, you must still create a message. The main difference from sending a direct message is that you must set the message delivery mode to persistent. When you send the message you also update the call to send to include your queue object as the destination.
 
@@ -101,6 +101,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
     ReturnCode returnCode = session.Send(message);
     if (returnCode == ReturnCode.SOLCLIENT_OK)
     {
+        // Delivery not yet confirmed. See ConfirmedPublish.cs
         Console.WriteLine("Done.");
     }
     else
@@ -110,7 +111,7 @@ using (IMessage message = ContextFactory.Instance.CreateMessage())
 }
 ```
 
-At this point the message to the Solace message router is sent and it will be waiting for your consumer on the queue.
+The message is transferred to the router asynchronously, but if all goes well, it will be waiting for your consumer on the queue. The [Confirmed Delivery tutorial]({{ site.baseurl }}/confirmed-delivery) shows how to make sure it gets there.
 
 ## Receiving a message from a queue
 
@@ -208,5 +209,7 @@ Finished.
 ```
 
 You have now successfully connected a client, sent persistent messages to a queue and received and acknowledged them.
+
+Learn how to verify all messages arrive to the router in our next tutorial, [Confirmed Delivery.]({{ site.baseurl }}/confirmed-delivery)
 
 If you have any issues sending and receiving a message, check the [Solace community]({{ site.links-community }}){:target="_top"} for answers to common issues.
