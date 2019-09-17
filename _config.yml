@@ -7,16 +7,16 @@ repository: https://github.com/SolaceSamples/solace-samples-dotnet
 # Also see _includes/intro.html to customize the description which gets included in index.html.
 
 # Links
-links-downloads: //dev.solace.com/downloads/
-links-community: //dev.solace.com/community/
+links-downloads: //solace.com/downloads/
+links-community: //solace.com/support/
 links-get-started: //dev.solace.com/get-started/dotnet-tutorials/
-links-solaceCloud-setup: //cloud.solace.com/create-messaging-service/
-docs-core-concepts: //docs.solace.com/Features/Core-Concepts.htm
-docs-endpoints: //docs.solace.com/Features/Core-Concepts.htm#endpoints
-docs-api-concepts: //docs.solace.com/Features/Core-Concepts.htm#api-concepts
+links-solaceCloud-setup: //solace.com/cloud/
+docs-core-concepts: //docs.solace.com/PubSub-Basics/Core-Concepts.htm
+docs-endpoints: //docs.solace.com/PubSub-Basics/Core-Concepts.htm
+docs-api-concepts: //docs.solace.com/PubSub-Basics/Core-Concepts.htm
 docs-solace-apis: //docs.solace.com/Solace-Messaging-APIs/Solace-APIs-Overview.htm
 docs-gm-rr: //docs.solace.com/Solace-Messaging-APIs/Request-Reply-Messaging.htm
-docs-topic-queue: //docs.solace.com/Features/Core-Concepts.htm#topic-queue-mapping
+docs-topic-queue: //docs.solace.com/PubSub-Basics/Core-Concepts.htm
 docs-dotnet: //docs.solace.com/Solace-Messaging-APIs/net-api-home.htm
 docs-client-profile: //docs.solace.com/Features/Core-Concepts.htm#client-profile
 docs-dotnet-api: //docs.solace.com/API-Developer-Online-Ref-Documentation/net/index.html
