@@ -8,7 +8,7 @@ repository: https://github.com/SolaceSamples/solace-samples-dotnet
 
 # Links
 links-downloads: //solace.com/downloads/
-links-community: //solace.com/support/
+links-community: //solace.community
 links-get-started: //dev.solace.com/get-started/dotnet-tutorials/
 links-solaceCloud-setup: //solace.com/cloud/
 docs-core-concepts: //docs.solace.com/PubSub-Basics/Core-Concepts.htm
