@@ -4,7 +4,7 @@
 The "Getting Started" tutorials will get you up to speed and sending messages with Solace technology as quickly as possible. There are three ways you can get started:
 
 - Follow [these instructions](https://cloud.solace.com/learn/group_getting_started/ggs_signup.html) to quickly spin up a cloud-based Solace messaging service for your applications.
-- Follow [these instructions](https://docs.solace.com/Solace-VMR-Set-Up/Setting-Up-VMRs.htm) to start the Solace VMR in leading Clouds, Container Platforms or Hypervisors. The tutorials outline where to download and how to install the Solace VMR.
+- Follow [these instructions](https://docs.solace.com/Solace-SW-Broker-Set-Up/Setting-Up-SW-Brokers.htm) to start the Solace VMR in leading Clouds, Container Platforms or Hypervisors. The tutorials outline where to download and how to install the Solace VMR.
 - If your company has Solace message routers deployed, contact your middleware team to obtain the host name or IP address of a Solace message router to test against, a username and password to access it, and a VPN in which you can produce and consume messages.
 
 ## Contents
@@ -27,7 +27,7 @@ Notice that in this case both x64 and x86 API assemblies and libraries have the 
 
 ### Get the API: Using the Solace Developer Portal
 
-The SolClient for .NET can be [downloaded here](http://dev.solace.com/downloads/). That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
+The SolClient for .NET can be [downloaded here](https://solace.com/downloads/). That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
 
 You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
 
@@ -81,6 +81,6 @@ This project is licensed under the Apache License, Version 2.0. - See the [LICEN
 For more information try these resources:
 
 - The Solace Developer Portal website at: http://dev.solace.com
-- Get a better understanding of [Solace technology](http://dev.solace.com/tech/).
+- Get a better understanding of [Solace technology](https://solace.com/products/tech/).
 - Check out the [Solace blog](http://dev.solace.com/blog/) for other interesting discussions around Solace technology
-- Ask the [Solace community.](http://dev.solace.com/community/)
+- Ask the [Solace community.](https://solace.community)
