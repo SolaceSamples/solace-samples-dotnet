@@ -83,4 +83,4 @@ For more information try these resources:
 - The Solace Developer Portal website at: http://dev.solace.com
 - Get a better understanding of [Solace technology](https://solace.com/products/tech/).
 - Check out the [Solace blog](http://dev.solace.com/blog/) for other interesting discussions around Solace technology
-- Ask the [Solace community.](https://solace.com/support/)
+- Ask the [Solace community.](https://solace.community)
