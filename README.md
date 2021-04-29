@@ -51,7 +51,7 @@ Building these examples is simple. The following provides an example. For ideas 
 
 You need `SolaceSystems.Solclient.Messaging_64.dll` (or `SolaceSystems.Solclient.Messaging.dll`) at compile and runtime time and `libsolclient.dll` at runtime in the same directory where your source and executables are.
 
-Both DLLs are part of the Solace C#/.NET API distribution and located in `solclient-dotnet\lib` directory of that distribution.
+Both DLLs are part of the Solace C#/.NET API distribution and located in `bin\Win64` (or `bin\Win32`) directory of that distribution.
 
 ## Running the Samples
 
