@@ -21,7 +21,9 @@
 
 using System;
 using System.Text;
+
 using SolaceSystems.Solclient.Messaging;
+using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// Solace Systems Messaging API tutorial: QueueProducer
