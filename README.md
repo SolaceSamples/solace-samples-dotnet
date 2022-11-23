@@ -13,56 +13,24 @@ This repository contains code and matching tutorial walk throughs for five diffe
 
 ## Obtaining the Solace API
 
-This tutorial depends on you having the Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) downloaded and installed for your project, and the instructions in this tutorial assume you successfully done it. If your environment differs then adjust the build instructions appropriately.
+The Solace Messaging API for C#/.NET (also referred to as SolClient for .NET) is available as a [Nuget package](https://www.nuget.org/packages/SolaceSystems.Solclient.Messaging) and is included as a package reference in each sample project in the repository. If you are building the projects using Visual Studio, the library will be installed automatically when you load the Solution. If using Visual Studio code, run `dotnet restore` from the `src` directory to download the API.
 
-Here are a few easy ways to get this API.
-
-### Get the API: Using nuget.org
-
-Use the NuGet console or the NuGet Visual Studio Extension to download the [SolaceSystems.Solclient.Messaging](http://nuget.org/packages/SolaceSystems.Solclient.Messaging/) package for your solution and to install it for your project.
-
-The package contains the required libraries and brief API documentation. It will automatically copy correct libraries from the package to the target directory at build time, but of course if you compile your program from the command line you would need to refer to the API assemblies and libraries locations explicitly.
-
-Notice that in this case both x64 and x86 API assemblies and libraries have the same names.
-
-### Get the API: Using the Solace Developer Portal
-
-The SolClient for .NET can be [downloaded here](https://solace.com/downloads/). That distribution is a zip file containing the required libraries, detailed API documentation, and examples.
-
-You would need either to update your Visual Studio project to point to the extracted assemblies and libraries, or to refer to their locations explicitly.
-
-Notice that in this case x64 and x86 API assemblies and libraries have different names, e.g. the x86 API assembly is SolaceSystems.Solclient.Messaging.dll and the x64 API assembly is SolaceSystems.Solclient.Messaging_64.dll.
-
-## Checking out and Building
+## Building and Running the Project
 
 To check out the project and build it, do the following:
 
-  1. clone this GitHub repository
-  1. `cd solace-samples-dotnet`
-
-### Build the Samples
-
-Building these examples is simple. The following provides an example. For ideas on how to build with other IDEs you can consult the README of the C# API library.
-
-```
-> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicPublisher.exe  TopicPublisher.cs
-> csc /reference:SolaceSystems.Solclient.Messaging_64.dll /optimize /out:TopicSubscriber.exe  TopicSubscriber.cs
-```
-
-You need `SolaceSystems.Solclient.Messaging_64.dll` (or `SolaceSystems.Solclient.Messaging.dll`) at compile and runtime time and `libsolclient.dll` at runtime in the same directory where your source and executables are.
-
-Both DLLs are part of the Solace C#/.NET API distribution and located in `bin\Win64` (or `bin\Win32`) directory of that distribution.
-
-## Running the Samples
-
-To try individual samples, build the project from source and then run samples like the following:
-
-```
-$ ./TopicSubscriber HOST
-
-```
-
-See the [tutorials](https://dev.solace.com/samples/solace-samples-dotnet/) for more details.
+**Visual Studio**
+  1. Clone this GitHub repository
+  1. Open the Solution `src/SolaceExamples.sln`
+  1. Designate a startup project (or projects)
+  1. Start debugging by pressing F5
+  
+**VS Code**
+  1. Clone this GitHub repository
+  1. `cd solace-samples-dotnet/src`
+  1. `dotnet restore`
+  1. `dotnet build`
+  1. `dotnet run --project <ProjectName> -- [args]`
 
 ## Contributing
 
