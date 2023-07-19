@@ -138,7 +138,7 @@ namespace Tutorial
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("Usage: QueueProduce <host> <username>@<vpnname> <password>");
+                Console.WriteLine("Usage: QueueProducer <host> <username>@<vpnname> <password>");
                 Environment.Exit(1);
             }
 
