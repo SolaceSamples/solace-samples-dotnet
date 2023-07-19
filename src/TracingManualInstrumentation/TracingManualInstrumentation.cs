@@ -165,10 +165,10 @@ namespace Tutorial
                     {
                         // Create the message content as a binary attachment
                         message.BinaryAttachment = Encoding.ASCII.GetBytes(
-                            string.Format("Tracing Manual Instrumentation Sample! Message ID: {0}", i));
+                            string.Format("Tracing Manual Instrumentation Sample! Message number: {0}", i));
 
                         // Send the message to the queue on the Solace messaging router
-                        Console.WriteLine("Sending message ID {0} to topic '{1}' mapped to queue '{2}'...",
+                        Console.WriteLine("Sending message ID {0} on topic '{1}' mapped to queue '{2}'...",
                             i, tutorialTopic.Name, queueName);
 
                         var activity = HowToCreateActivityOnMessagePublish(message);
@@ -265,9 +265,9 @@ namespace Tutorial
             // .NET OpenTelemetry API rely on System.Diagnostics.Activity and System.Diagnostics.ActivityContext for creation of activity and context
             var activityName = "ProducerActivity";
             using var activity = activitySource.StartActivity(activityName, ActivityKind.Producer);
-            activity?.SetTag("messaging.system", "Solace Pubsub plus");
-            activity?.SetTag("messaging.destination_kind", "queue");
-            activity?.SetTag("messaging.destination", "queueName");
+            activity?.SetTag("messaging.system", "solace");
+            activity?.SetTag("messaging.message_delivery_mode", "persistent");
+            activity?.SetTag("messaging.destination", "topic");
             Baggage baggage = new();
             baggage.SetBaggage(KeyValuePair.Create(key: "key1", value: "value1"));
             baggage.SetBaggage(KeyValuePair.Create(key: "hello", value: "hi"));
@@ -291,7 +291,7 @@ namespace Tutorial
         {
             var activityName = "ConsumerReceive";
             using var activity = activitySource.StartActivity(activityName, ActivityKind.Consumer, propagationContext.ActivityContext);
-            activity?.SetTag("messaging.system", "Solace Pubsub plus");
+            activity?.SetTag("messaging.system", "solace");
             activity?.SetTag("messaging.operation", "process");
             activity?.SetTag("messaging.destination_kind", "queue");
             activity?.SetTag("messaging.destination", message.Destination);
