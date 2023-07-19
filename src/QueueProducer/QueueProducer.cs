@@ -138,14 +138,14 @@ namespace Tutorial
         {
             if (args.Length < 3)
             {
-                Console.WriteLine("Usage: TopicPublisher <host> <username>@<vpnname> <password>");
+                Console.WriteLine("Usage: QueueProducer <host> <username>@<vpnname> <password>");
                 Environment.Exit(1);
             }
 
             string[] split = args[1].Split('@');
             if (split.Length != 2)
             {
-                Console.WriteLine("Usage: TopicPublisher <host> <username>@<vpnname> <password>");
+                Console.WriteLine("Usage: QueueProducer <host> <username>@<vpnname> <password>");
                 Environment.Exit(1);
             }
 
