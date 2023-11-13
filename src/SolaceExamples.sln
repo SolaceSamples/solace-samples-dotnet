@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopicSubscriber", "TopicSub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopicToQueueMapping", "TopicToQueueMapping\TopicToQueueMapping.csproj", "{3740B4D9-1B35-4858-B285-1879FB4CE08F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingManualInstrumentation", "TracingManualInstrumentation\TracingManualInstrumentation\TracingManualInstrumentation.csproj", "{7502096A-E5E6-4EC1-B729-192E6079C6B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingManualInstrumentation", "TracingManualInstrumentation\TracingManualInstrumentation.csproj", "{7502096A-E5E6-4EC1-B729-192E6079C6B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
