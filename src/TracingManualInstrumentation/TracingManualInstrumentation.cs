@@ -168,7 +168,7 @@ namespace Tutorial
                             string.Format("Tracing Manual Instrumentation Sample! Message number: {0}", i));
 
                         // Send the message to the queue on the Solace messaging router
-                        Console.WriteLine("Sending message ID {0} on topic '{1}' mapped to queue '{2}'...",
+                        Console.WriteLine("Sending message number {0} on topic '{1}' mapped to queue '{2}'...",
                             i, tutorialTopic.Name, queueName);
 
                         var activity = HowToCreateActivityOnMessagePublish(message);
@@ -293,7 +293,7 @@ namespace Tutorial
             using var activity = activitySource.StartActivity(activityName, ActivityKind.Consumer, propagationContext.ActivityContext);
             activity?.SetTag("messaging.system", "solace");
             activity?.SetTag("messaging.operation", "process");
-            activity?.SetTag("messaging.destination_kind", "queue");
+            activity?.SetTag("messaging.destination_kind", "topic");
             activity?.SetTag("messaging.destination", message.Destination);
             activity?.SetParentId(propagationContext.ActivityContext.SpanId.ToString());
             activity?.SetBaggage("baggage", propagationContext.Baggage.ToString());
