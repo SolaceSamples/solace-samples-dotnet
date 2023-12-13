@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFramework>net6.0</TargetFramework>
     <Platforms>AnyCPU</Platforms>
     <RuntimeIdentifiers>win-x64;win-x86;linux-x64;osx-x64;osx-arm64;linux-arm64</RuntimeIdentifiers>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="OpenTelemetry.Api" Version="1.5.1" />
     <PackageReference Include="Solace.Messaging.Trace.Propagation" Version="1.0.0" />
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.23.0-rc-15905" />
   </ItemGroup>
 
 </Project>
