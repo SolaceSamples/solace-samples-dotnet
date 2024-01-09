@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Platforms>AnyCPU</Platforms>
+    <RuntimeIdentifiers>win-x64;win-x86;linux-x64;osx-x64;osx-arm64</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup>
     <Company>Solace Corp</Company>
@@ -9,6 +11,6 @@
     <Copyright>Copyright © Solace Corp 2022</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.21.0" />
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.23.0" />
   </ItemGroup>
 </Project>
