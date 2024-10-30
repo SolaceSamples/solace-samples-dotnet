@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="OpenTelemetry.Api" Version="1.5.1" />
     <PackageReference Include="Solace.Messaging.Trace.Propagation" Version="1.0.0" />
-    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.24.1-dev-net80-16614" />
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.26.0" />
   </ItemGroup>
 
 </Project>

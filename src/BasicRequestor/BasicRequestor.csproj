@@ -11,6 +11,6 @@
     <Copyright>Copyright © Solace Corp 2022</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.24.1-dev-net80-16614" />
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.26.0" />
   </ItemGroup>
 </Project>
