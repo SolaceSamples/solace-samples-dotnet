@@ -269,8 +269,11 @@ namespace Tutorial
             activity?.SetTag("messaging.message_delivery_mode", "persistent");
             activity?.SetTag("messaging.destination", "topic");
             Baggage baggage = new();
-            baggage.SetBaggage(KeyValuePair.Create(key: "key1", value: "value1"));
-            baggage.SetBaggage(KeyValuePair.Create(key: "hello", value: "hi"));
+            //baggage.SetBaggage(KeyValuePair.Create(key: "key1", value: "value1"));
+            //baggage.SetBaggage(KeyValuePair.Create(key: "hello", value: "hi"));
+            Baggage.SetBaggage("key1", "value1");
+            Baggage.SetBaggage("hello", "hi");
+            
             // Injects current context into the message to transport it across message boundaries. Transported context will be used to create parent - child relationship
             // between spans from different services and broker spans. The SolaceMessageCarrier.Setter can be used to inject both context and baggage into the Solace message.
             try

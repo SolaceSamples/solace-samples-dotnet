@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net462</TargetFrameworks>
     <Platforms>AnyCPU</Platforms>
     <RuntimeIdentifiers>win-x64;win-x86;linux-x64;osx-x64;osx-arm64;linux-arm64</RuntimeIdentifiers>
   </PropertyGroup>
@@ -11,6 +11,6 @@
     <Copyright>Copyright © Solace Corp 2022</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.24.0" />
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.25.1-dev-removenet2-17259" />
   </ItemGroup>
 </Project>
