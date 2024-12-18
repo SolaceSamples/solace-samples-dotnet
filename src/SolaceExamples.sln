@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopicToQueueMapping", "Topi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracingManualInstrumentation", "TracingManualInstrumentation\TracingManualInstrumentation.csproj", "{7502096A-E5E6-4EC1-B729-192E6079C6B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayloadCompression", "PayloadCompression\PayloadCompression.csproj", "{758DC15C-1CAC-41ED-97C1-1347D1116A11}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,10 +63,6 @@ Global
 		{7502096A-E5E6-4EC1-B729-192E6079C6B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7502096A-E5E6-4EC1-B729-192E6079C6B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7502096A-E5E6-4EC1-B729-192E6079C6B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{758DC15C-1CAC-41ED-97C1-1347D1116A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{758DC15C-1CAC-41ED-97C1-1347D1116A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{758DC15C-1CAC-41ED-97C1-1347D1116A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{758DC15C-1CAC-41ED-97C1-1347D1116A11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
