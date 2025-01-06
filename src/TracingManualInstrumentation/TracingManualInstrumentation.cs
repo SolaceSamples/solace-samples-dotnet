@@ -35,7 +35,7 @@ namespace Tutorial
 {
     /// <summary>
     ///  Demonstrates how to use Solace Systems Messaging API for injecting and extracting tracing data to and from Solace message.
-    ///  Refer https://codelabs.solace.dev/codelabs/dt-otel/index.html?index=..%2F..index#1 for details on how to setup Solace broker, configure otel-collector and how to view tarces in Jaeger. 
+    ///  Refer https://codelabs.solace.dev/codelabs/dt-otel/index.html?index=..%2F..index#1 for details on how to setup Solace broker, configure otel-collector and how to view traces in Jaeger. 
     /// </summary>
     class TracingManualInstrumentation : IDisposable
     {
@@ -268,9 +268,8 @@ namespace Tutorial
             activity?.SetTag("messaging.system", "solace");
             activity?.SetTag("messaging.message_delivery_mode", "persistent");
             activity?.SetTag("messaging.destination", "topic");
-            Baggage baggage = new();
-            //baggage.SetBaggage(KeyValuePair.Create(key: "key1", value: "value1"));
-            //baggage.SetBaggage(KeyValuePair.Create(key: "hello", value: "hi"));
+
+            // Use Baggage Api to set baggage items https://github.com/open-telemetry/opentelemetry-dotnet/blob/main/src/OpenTelemetry.Api/README.md#baggage-api. Baggage items are key value pairs that are propagated across process boundaries.
             Baggage.SetBaggage("key1", "value1");
             Baggage.SetBaggage("hello", "hi");
             
