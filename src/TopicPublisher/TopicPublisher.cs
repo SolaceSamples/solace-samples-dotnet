@@ -67,7 +67,9 @@ namespace Tutorial
                 VPNName = VPNName,
                 UserName = UserName,
                 Password = Password,
-                ReconnectRetries = DefaultReconnectRetries
+                ReconnectRetries = DefaultReconnectRetries,
+                // Option to disbale validating of certificate
+                SSLValidateCertificate = false
             };
 
             // Connect to the Solace messaging router
