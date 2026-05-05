@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net462</TargetFrameworks>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Solace Messaging API for .NET -->
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.29.0" />
+
+    <!-- Solace JSON Schema SERDES -->
+    <PackageReference Include="Solace.SchemaRegistry.Serdes.JsonSchema" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- Reference the Resources project for CreateUser/CreateUserResponse POCOs -->
+  <ItemGroup>
+    <ProjectReference Include="../../Resources/Resources.csproj" />
+  </ItemGroup>
+</Project>
