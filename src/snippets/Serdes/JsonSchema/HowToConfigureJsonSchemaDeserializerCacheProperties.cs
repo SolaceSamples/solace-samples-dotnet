@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.SchemaRegistry.Serdes.JsonSchema;
 using System.Text.Json.Nodes;
 
@@ -46,16 +45,16 @@ namespace Snippets.Serdes.JsonSchema
             // Set required Schema Registry connection properties
 
             // Example 1: Set cache TTL using an integer value (milliseconds)
-            config[SchemaResolverPropertyKeys.CacheTtlMs] = 5000;
+            config[JsonSchemaPropertyKeys.CacheTtlMs] = 5000;
 
             // Example 2: Set cache TTL using a TimeSpan
-            config[SchemaResolverPropertyKeys.CacheTtlMs] = TimeSpan.FromSeconds(5);
+            config[JsonSchemaPropertyKeys.CacheTtlMs] = TimeSpan.FromSeconds(5);
 
             // Example 3: Set cache TTL using a string value
-            config[SchemaResolverPropertyKeys.CacheTtlMs] = "5000";
+            config[JsonSchemaPropertyKeys.CacheTtlMs] = "5000";
 
             // Example 4: Disable caching completely
-            config[SchemaResolverPropertyKeys.CacheTtlMs] = 0;
+            config[JsonSchemaPropertyKeys.CacheTtlMs] = 0;
 
             // Create and configure JSON Schema deserializer
             using (var deserializer = new JsonSchemaDeserializer<JsonNode>())
@@ -82,10 +81,10 @@ namespace Snippets.Serdes.JsonSchema
             // Set required Schema Registry connection properties
 
             // Example 1: Use cached schemas when registry lookups fail (resilient mode)
-            config[SchemaResolverPropertyKeys.UseCachedOnError] = true;
+            config[JsonSchemaPropertyKeys.UseCachedOnError] = true;
 
             // Example 2: Throw exceptions when registry lookups fail (strict mode, default value)
-            config[SchemaResolverPropertyKeys.UseCachedOnError] = false;
+            config[JsonSchemaPropertyKeys.UseCachedOnError] = false;
 
             // Create and configure JSON Schema deserializer
             using (var deserializer = new JsonSchemaDeserializer<JsonNode>())

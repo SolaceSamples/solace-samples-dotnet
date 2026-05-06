@@ -15,7 +15,6 @@
  */
 
 using System.Collections.Generic;
-using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.SchemaRegistry.Serdes.JsonSchema;
 using System.Text.Json.Nodes;
 using SerdesLogging = Solace.SchemaRegistry.Serdes.Core.Logging;
@@ -41,9 +40,9 @@ namespace Snippets.Serdes.JsonSchema
 
             var config = new Dictionary<string, object>
             {
-                [SchemaResolverPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
-                [SchemaResolverPropertyKeys.AuthUsername] = "sr-readonly",
-                [SchemaResolverPropertyKeys.AuthPassword] = "roPassword"
+                [JsonSchemaPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
+                [JsonSchemaPropertyKeys.AuthUsername] = "sr-readonly",
+                [JsonSchemaPropertyKeys.AuthPassword] = "roPassword"
             };
 
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -64,12 +63,12 @@ namespace Snippets.Serdes.JsonSchema
 
             var config = new Dictionary<string, object>
             {
-                [SchemaResolverPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
-                [SchemaResolverPropertyKeys.AuthUsername] = "sr-readonly",
-                [SchemaResolverPropertyKeys.AuthPassword] = "roPassword",
-                [SchemaResolverPropertyKeys.NetworkTraceEnabled] = true, // requires log level Debug to produce output
+                [JsonSchemaPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
+                [JsonSchemaPropertyKeys.AuthUsername] = "sr-readonly",
+                [JsonSchemaPropertyKeys.AuthPassword] = "roPassword",
+                [JsonSchemaPropertyKeys.NetworkTraceEnabled] = true, // requires log level Debug to produce output
                 // Optional: max body size to log in bytes (default: 10240)
-                [SchemaResolverPropertyKeys.NetworkTraceMaxLogSize] = 4096
+                [JsonSchemaPropertyKeys.NetworkTraceMaxLogSize] = 4096
             };
 
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -90,12 +89,12 @@ namespace Snippets.Serdes.JsonSchema
 
             var config = new Dictionary<string, object>
             {
-                [SchemaResolverPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
-                [SchemaResolverPropertyKeys.AuthUsername] = "sr-readonly",
-                [SchemaResolverPropertyKeys.AuthPassword] = "roPassword",
-                [SchemaResolverPropertyKeys.NetworkTraceEnabled] = true, // requires log level Debug to produce output
+                [JsonSchemaPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3",
+                [JsonSchemaPropertyKeys.AuthUsername] = "sr-readonly",
+                [JsonSchemaPropertyKeys.AuthPassword] = "roPassword",
+                [JsonSchemaPropertyKeys.NetworkTraceEnabled] = true, // requires log level Debug to produce output
                 // Optional: max body size to log in bytes (default: 10240)
-                [SchemaResolverPropertyKeys.NetworkTraceMaxLogSize] = 4096
+                [JsonSchemaPropertyKeys.NetworkTraceMaxLogSize] = 4096
             };
 
             using (var deserializer = new JsonSchemaDeserializer<JsonNode>())

@@ -15,7 +15,6 @@
  */
 
 using System.Collections.Generic;
-using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.SchemaRegistry.Serdes.JsonSchema;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json.Nodes;
@@ -41,11 +40,11 @@ namespace Snippets.Serdes.JsonSchema
             var config = new Dictionary<string, object>();
 
             // Set Schema Registry URL
-            config[SchemaResolverPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
+            config[JsonSchemaPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
 
             // Set authentication credentials
-            config[SchemaResolverPropertyKeys.AuthUsername] = "sr-readonly";
-            config[SchemaResolverPropertyKeys.AuthPassword] = "roPassword";
+            config[JsonSchemaPropertyKeys.AuthUsername] = "sr-readonly";
+            config[JsonSchemaPropertyKeys.AuthPassword] = "roPassword";
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -66,11 +65,11 @@ namespace Snippets.Serdes.JsonSchema
 
             // Set Schema Registry URL
             // NOTE: Use HTTPS for secure communication with the Schema Registry
-            config[SchemaResolverPropertyKeys.RegistryUrl] = "https://localhost:8081/apis/registry/v3";
+            config[JsonSchemaPropertyKeys.RegistryUrl] = "https://localhost:8081/apis/registry/v3";
 
             // Set authentication credentials
-            config[SchemaResolverPropertyKeys.AuthUsername] = "sr-readonly";
-            config[SchemaResolverPropertyKeys.AuthPassword] = "roPassword";
+            config[JsonSchemaPropertyKeys.AuthUsername] = "sr-readonly";
+            config[JsonSchemaPropertyKeys.AuthPassword] = "roPassword";
 
             // Configure TLS properties for secure connection
             // NOTE: The TrustStore is OPTIONAL and supplements the system trust store with additional
@@ -81,18 +80,18 @@ namespace Snippets.Serdes.JsonSchema
             var trustStore = new X509Certificate2Collection();
             var certificate = new X509Certificate2("path/to/certificate.pem");
             trustStore.Add(certificate);
-            config[SchemaResolverPropertyKeys.TrustStore] = trustStore;
+            config[JsonSchemaPropertyKeys.TrustStore] = trustStore;
 
             // Configure certificate validation (by default set to true)
             // NOTE: Disabling certificate validation can be useful for debugging purposes,
             // but it's not recommended for production use as it reduces security.
-            // config[SchemaResolverPropertyKeys.ValidateCertificate] = false;
+            // config[JsonSchemaPropertyKeys.ValidateCertificate] = false;
 
             // Configure certificate hostname validation (by default set to true)
             // NOTE: Disabling hostname validation can be useful for debugging purposes,
             // but it's not recommended for production use as it reduces security.
             // This has no effect if ValidateCertificate is set to false.
-            // config[SchemaResolverPropertyKeys.ValidateCertificateHostName] = false;
+            // config[JsonSchemaPropertyKeys.ValidateCertificateHostName] = false;
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())

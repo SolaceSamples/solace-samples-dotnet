@@ -60,7 +60,7 @@ namespace Snippets.Serdes.JsonSchema
 
             // Set the IArtifactReferenceResolverStrategy using DestinationIdStrategy closed generic Type object
             // NOTE: The IArtifactReferenceResolverStrategy must have a parameterless constructor
-            config[SchemaResolverPropertyKeys.ArtifactResolverStrategy] = typeof(DestinationIdStrategy<JsonNode, NJsonSchema.JsonSchema>);
+            config[JsonSchemaPropertyKeys.ArtifactResolverStrategy] = typeof(DestinationIdStrategy<JsonNode, NJsonSchema.JsonSchema>);
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -87,7 +87,7 @@ namespace Snippets.Serdes.JsonSchema
 
             // Set the IArtifactReferenceResolverStrategy using SolaceTopicIdStrategy Type object
             // NOTE: The IArtifactReferenceResolverStrategy must have a parameterless constructor
-            config[SchemaResolverPropertyKeys.ArtifactResolverStrategy] = typeof(SolaceTopicIdStrategy<,>);
+            config[JsonSchemaPropertyKeys.ArtifactResolverStrategy] = typeof(SolaceTopicIdStrategy<,>);
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -317,10 +317,10 @@ namespace Snippets.Serdes.JsonSchema
 
             // Set the IArtifactReferenceResolverStrategy using SolaceTopicIdStrategy Type object
             // NOTE: The IArtifactReferenceResolverStrategy must have a parameterless constructor
-            config[SchemaResolverPropertyKeys.ArtifactResolverStrategy] = typeof(SolaceTopicIdStrategy<,>);
+            config[JsonSchemaPropertyKeys.ArtifactResolverStrategy] = typeof(SolaceTopicIdStrategy<,>);
             // Set the topic Profile using the configured profile
             // the profile should contain at least one mapping, otherwise serialization will always fail with an ArgumentException
-            config[SchemaResolverPropertyKeys.StrategyTopicProfile] = profile;
+            config[JsonSchemaPropertyKeys.StrategyTopicProfile] = profile;
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -360,18 +360,18 @@ namespace Snippets.Serdes.JsonSchema
 
             // Example 1: Set explicit artifact id only
             // This pins every serialization request to the artifact with this id in the default group
-            // config[SchemaResolverPropertyKeys.ExplicitArtifactArtifactId] = "User";
+            // config[JsonSchemaPropertyKeys.ExplicitArtifactArtifactId] = "User";
 
             // Example 2: Set explicit artifact id and group id
             // This pins every serialization request to the artifact with this id in the specified group
-            // config[SchemaResolverPropertyKeys.ExplicitArtifactArtifactId] = "User";
-            // config[SchemaResolverPropertyKeys.ExplicitArtifactGroupId] = "com.solace.samples.serdes.jsonschema.schema";
+            // config[JsonSchemaPropertyKeys.ExplicitArtifactArtifactId] = "User";
+            // config[JsonSchemaPropertyKeys.ExplicitArtifactGroupId] = "com.solace.samples.serdes.jsonschema.schema";
 
             // Example 3: Set explicit artifact id, group id, and version
             // This pins every serialization request to the exact artifact version specified
-            config[SchemaResolverPropertyKeys.ExplicitArtifactArtifactId] = "User";
-            config[SchemaResolverPropertyKeys.ExplicitArtifactGroupId] = "com.solace.samples.serdes.jsonschema.schema";
-            config[SchemaResolverPropertyKeys.ExplicitArtifactVersion] = "1.0.0";
+            config[JsonSchemaPropertyKeys.ExplicitArtifactArtifactId] = "User";
+            config[JsonSchemaPropertyKeys.ExplicitArtifactGroupId] = "com.solace.samples.serdes.jsonschema.schema";
+            config[JsonSchemaPropertyKeys.ExplicitArtifactVersion] = "1.0.0";
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -399,7 +399,7 @@ namespace Snippets.Serdes.JsonSchema
             // NOTE: Custom strategies must use a closed generic type (e.g., typeof(MyStrategy<JsonNode, NJsonSchema.JsonSchema>)).
             // Open generic types (e.g., typeof(MyStrategy<,>)) are not supported for custom strategies and will throw.
             // NOTE: The IArtifactReferenceResolverStrategy must have a parameterless constructor
-            config[SchemaResolverPropertyKeys.ArtifactResolverStrategy] = typeof(CustomArtifactReferenceResolverStrategy<JsonNode, NJsonSchema.JsonSchema>);
+            config[JsonSchemaPropertyKeys.ArtifactResolverStrategy] = typeof(CustomArtifactReferenceResolverStrategy<JsonNode, NJsonSchema.JsonSchema>);
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())

@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.SchemaRegistry.Serdes.JsonSchema;
 using System.Text.Json.Nodes;
 
@@ -36,7 +35,7 @@ namespace Snippets.Serdes.JsonSchema
         /// <summary>
         /// Demonstrates how to configure the number of attempts to make when communicating
         /// with the schema registry before giving up. When used with
-        /// <see cref="SchemaResolverPropertyKeys.UseCachedOnError"/>,
+        /// <see cref="JsonSchemaPropertyKeys.UseCachedOnError"/>,
         /// this property specifies the number of attempts before falling back to the last cached value.
         /// <para>Valid values are positive long values (1 - <see cref="long.MaxValue"/>).</para>
         /// <para>The default value is 3.</para>
@@ -49,10 +48,10 @@ namespace Snippets.Serdes.JsonSchema
             // Set required Schema Registry connection properties
 
             // Example 1: Set number of request attempts using a long value
-            config[SchemaResolverPropertyKeys.RequestAttempts] = 5L;
+            config[JsonSchemaPropertyKeys.RequestAttempts] = 5L;
 
             // Example 2: Set number of request attempts using a string value
-            // config[SchemaResolverPropertyKeys.RequestAttempts] = "5";
+            // config[JsonSchemaPropertyKeys.RequestAttempts] = "5";
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -80,16 +79,16 @@ namespace Snippets.Serdes.JsonSchema
             // Set required Schema Registry connection properties
 
             // Example 1: Set backoff time using an integer value (milliseconds)
-            config[SchemaResolverPropertyKeys.RequestAttemptBackoffMs] = 1000;
+            config[JsonSchemaPropertyKeys.RequestAttemptBackoffMs] = 1000;
 
             // Example 2: Set backoff time using a string value (milliseconds)
-            // config[SchemaResolverPropertyKeys.RequestAttemptBackoffMs] = "1000";
+            // config[JsonSchemaPropertyKeys.RequestAttemptBackoffMs] = "1000";
 
             // Example 3: Set backoff time using a TimeSpan object
-            // config[SchemaResolverPropertyKeys.RequestAttemptBackoffMs] = TimeSpan.FromSeconds(1);
+            // config[JsonSchemaPropertyKeys.RequestAttemptBackoffMs] = TimeSpan.FromSeconds(1);
 
             // Example 4: No backoff between retry attempts
-            // config[SchemaResolverPropertyKeys.RequestAttemptBackoffMs] = 0;
+            // config[JsonSchemaPropertyKeys.RequestAttemptBackoffMs] = 0;
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())
@@ -115,13 +114,13 @@ namespace Snippets.Serdes.JsonSchema
             // Set required Schema Registry connection properties
 
             // Configure number of request attempts
-            config[SchemaResolverPropertyKeys.RequestAttempts] = 5L;
+            config[JsonSchemaPropertyKeys.RequestAttempts] = 5L;
 
             // Configure backoff time between attempts (2 seconds)
-            config[SchemaResolverPropertyKeys.RequestAttemptBackoffMs] = TimeSpan.FromSeconds(2);
+            config[JsonSchemaPropertyKeys.RequestAttemptBackoffMs] = TimeSpan.FromSeconds(2);
 
             // Optionally configure to use cached values on error
-            config[SchemaResolverPropertyKeys.UseCachedOnError] = true;
+            config[JsonSchemaPropertyKeys.UseCachedOnError] = true;
 
             // Create and configure JSON Schema serializer
             using (var serializer = new JsonSchemaSerializer<JsonNode>())

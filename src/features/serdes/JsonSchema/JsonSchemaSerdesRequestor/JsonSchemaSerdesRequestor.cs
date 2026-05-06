@@ -20,7 +20,6 @@ using System.Threading;
 using SolaceSystems.Solclient.Messaging;
 using SolaceSystems.Solclient.Messaging.Serialization;
 using Solace.SchemaRegistry.Serdes.JsonSchema;
-using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 using Resources.JsonSchema;
 
@@ -255,9 +254,9 @@ class JsonSchemaSerdesRequestor
     {
         return new Dictionary<string, object>
         {
-            { SchemaResolverPropertyKeys.RegistryUrl, RegistryUrl },
-            { SchemaResolverPropertyKeys.AuthUsername, RegistryUsername },
-            { SchemaResolverPropertyKeys.AuthPassword, RegistryPassword },
+            { JsonSchemaPropertyKeys.RegistryUrl, RegistryUrl },
+            { JsonSchemaPropertyKeys.AuthUsername, RegistryUsername },
+            { JsonSchemaPropertyKeys.AuthPassword, RegistryPassword },
         };
     }
 }
