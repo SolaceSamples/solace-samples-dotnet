@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "CreateUser",
+    "type": "object",
+    "customDotnetType": "Resources.Serdes.JsonSchema.CreateUser, Resources",
+    "additionalProperties": false,
+    "properties": {
+        "name": {
+            "description": "Name of the user",
+            "type": "string"
+        },
+        "email": {
+            "description": "Email of the user",
+            "type": "string",
+            "format": "email"
+        }
+    },
+    "required": [
+        "name",
+        "email"
+    ]
+}
