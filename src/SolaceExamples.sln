@@ -47,9 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Serdes", "Serdes", "{C82264
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JsonSchema", "JsonSchema", "{B110E3AA-8C95-3025-119C-7D181E51E35E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdesJsonSchemaSnippets", "snippets\Serdes\JsonSchema\SerdesJsonSchemaSnippets.csproj", "{3F14A132-6AFD-4452-8888-B2C101A5D414}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerdesJsonSchemaSnippets", "snippets\serdes\JsonSchema\SerdesJsonSchemaSnippets.csproj", "{3F14A132-6AFD-4452-8888-B2C101A5D414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "snippets\Serdes\Resources\Resources.csproj", "{F8B44B08-F98F-4F34-926F-74C261D4B485}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "snippets\serdes\Resources\Resources.csproj", "{F8B44B08-F98F-4F34-926F-74C261D4B485}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
