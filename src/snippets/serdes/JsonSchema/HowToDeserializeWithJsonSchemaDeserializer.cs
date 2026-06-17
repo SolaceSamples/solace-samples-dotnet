@@ -29,6 +29,7 @@ namespace Snippets.Serdes.JsonSchema
     ///   <item>DeserializeToUser - Deserialize to a User POCO</item>
     ///   <item>DeserializeToUserWithTypeProperty - Deserialize to a User POCO using the type property in the schema</item>
     ///   <item>DeserializeToJsonNode - Deserialize to a JsonNode object</item>
+    ///   <item>DeserializeWithJsonSchemaReferences - Deserialize a UserAccount with a nested schema reference</item>
     /// </list>
     /// </summary>
     public static class HowToDeserializeWithJsonSchemaDeserializer
@@ -91,6 +92,36 @@ namespace Snippets.Serdes.JsonSchema
                 User user = await deserializer.DeserializeAsync(topic, payloadBytes, headers);
 
                 // At this point, the user object can be used in processing.
+            }
+        }
+
+        /// <summary>
+        /// Demonstrates how to deserialize a UserAccount with a nested User schema reference.
+        /// No special configuration is required — the deserializer resolves referenced schemas
+        /// automatically using the schema identifier embedded in the message headers.
+        /// </summary>
+        /// <param name="topic">Destination string from the messaging system.</param>
+        /// <param name="payloadBytes">Serialized UserAccount JSON object using JsonSchemaSerializer.</param>
+        /// <param name="headers">Header map from the messaging system.</param>
+        public static async Task DeserializeWithJsonSchemaReferences(string topic, byte[] payloadBytes, Dictionary<string, object> headers)
+        {
+            // Create configuration dictionary
+            var config = new Dictionary<string, object>();
+
+            // Set required Schema Registry connection properties
+
+            // Create and configure JSON Schema deserializer
+            using (var deserializer = new JsonSchemaDeserializer<UserAccount>())
+            {
+                deserializer.Configure(config);
+
+                // At this point, the JSON Schema deserializer is configured and ready to use for deserialization.
+                // Note the headers dictionary must include the following:
+                // - A schema identifier for schema resolution.
+                UserAccount userAccount = await deserializer.DeserializeAsync(topic, payloadBytes, headers);
+
+                // At this point, the userAccount object and its nested User can be used in processing.
+                User user = userAccount.User;
             }
         }
 
