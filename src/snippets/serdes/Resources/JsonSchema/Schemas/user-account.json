@@ -1,8 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "user-account.json",
     "title": "UserAccount",
     "type": "object",
-    "customDotnetType": "Resources.Serdes.JsonSchema.UserAccount, Resources",
+    "customDotnetType": "Resources.JsonSchema.UserAccount, Resources",
     "additionalProperties": false,
     "properties": {
         "accountId": {

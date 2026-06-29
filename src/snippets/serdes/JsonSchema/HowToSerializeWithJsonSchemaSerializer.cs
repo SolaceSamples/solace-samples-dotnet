@@ -28,7 +28,7 @@ namespace Snippets.Serdes.JsonSchema
     /// <list type="bullet">
     ///   <item>SerializeWithUserJsonSchema - Basic serialization with User POCO</item>
     ///   <item>SerializeWithJsonNode - Serialization with JsonNode object</item>
-    ///   <item>SerializeWithFindLatest - Serialization with find-latest-artifact resolver strategy</item>
+    ///   <item>SerializeWithFindLatest - Serialization with find-latest schema resolver option</item>
     ///   <item>SerializeWithJsonSchemaReferences - Serialization with a nested schema reference</item>
     ///   <item>SerializeWithExplicitSchemaVersion - Serialization with an explicit schema version</item>
     /// </list>
@@ -72,7 +72,7 @@ namespace Snippets.Serdes.JsonSchema
         }
 
         /// <summary>
-        /// Demonstrates serialization using the find-latest-artifact resolver strategy with a UserAccount POCO.
+        /// Demonstrates serialization using the find-latest schema resolver option with a User POCO.
         /// When FindLatestArtifact is enabled, the serializer resolves the latest version of the schema
         /// from the registry at the time of serialization.
         /// </summary>
@@ -86,21 +86,15 @@ namespace Snippets.Serdes.JsonSchema
             // Enable find-latest-artifact strategy to always resolve the most recent schema version
             config[JsonSchemaPropertyKeys.FindLatestArtifact] = true;
 
-            // Create UserAccount object with nested User
-            var userAccount = new UserAccount
+            var user = new User
             {
-                AccountId = "ACC-001",
-                IsActive = true,
-                User = new User
-                {
-                    Name = "John Doe",
-                    Id = "-1",
-                    Email = "support@solace.com"
-                }
+                Name = "John Doe",
+                Id = "-1",
+                Email = "support@solace.com"
             };
 
             // Create and configure JSON Schema serializer
-            using (var serializer = new JsonSchemaSerializer<UserAccount>())
+            using (var serializer = new JsonSchemaSerializer<User>())
             {
                 serializer.Configure(config);
 
@@ -108,10 +102,10 @@ namespace Snippets.Serdes.JsonSchema
                 var headers = new Dictionary<string, object>();
 
                 // At this point, the JSON Schema serializer is configured with find-latest-artifact enabled.
-                byte[] userAccountBytes = await serializer.SerializeAsync("solace/samples/user-account/json", userAccount, headers);
+                byte[] userBytes = await serializer.SerializeAsync("solace/samples/json", user, headers);
 
-                // At this point, userAccountBytes and headers are ready to be applied to the messaging system of choice
-                // userAccountBytes are the UserAccount object serialized as bytes
+                // At this point, userBytes and headers are ready to be applied to the messaging system of choice
+                // userBytes are the User object serialized as bytes
                 // headers were modified to hold the schema registry header fields to include:
                 // - SchemaId (type long) for schema identification
             }
@@ -175,21 +169,15 @@ namespace Snippets.Serdes.JsonSchema
             // Pin serialization to schema version "1"
             config[JsonSchemaPropertyKeys.ExplicitArtifactVersion] = "1";
 
-            // Create UserAccount object with nested User
-            var userAccount = new UserAccount
+            var user = new User
             {
-                AccountId = "ACC-001",
-                IsActive = true,
-                User = new User
-                {
-                    Name = "John Doe",
-                    Id = "-1",
-                    Email = "support@solace.com"
-                }
+                Name = "John Doe",
+                Id = "-1",
+                Email = "support@solace.com"
             };
 
             // Create and configure JSON Schema serializer
-            using (var serializer = new JsonSchemaSerializer<UserAccount>())
+            using (var serializer = new JsonSchemaSerializer<User>())
             {
                 serializer.Configure(config);
 
@@ -197,10 +185,10 @@ namespace Snippets.Serdes.JsonSchema
                 var headers = new Dictionary<string, object>();
 
                 // At this point, the JSON Schema serializer is configured with an explicit schema version.
-                byte[] userAccountBytes = await serializer.SerializeAsync("solace/samples/user-account/json", userAccount, headers);
+                byte[] userBytes = await serializer.SerializeAsync("solace/samples/json", user, headers);
 
-                // At this point, userAccountBytes and headers are ready to be applied to the messaging system of choice
-                // userAccountBytes are the UserAccount object serialized as bytes
+                // At this point, userBytes and headers are ready to be applied to the messaging system of choice
+                // userBytes are the User object serialized as bytes
                 // headers were modified to hold the schema registry header fields to include:
                 // - SchemaId (type long) for schema identification
             }
