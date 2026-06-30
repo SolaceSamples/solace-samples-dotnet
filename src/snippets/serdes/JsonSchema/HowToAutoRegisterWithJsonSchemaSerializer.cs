@@ -71,7 +71,7 @@ namespace Snippets.Serdes.JsonSchema
 
             // Path to the local JSON Schema file to read and register.
             // Use AppContext.BaseDirectory so the path resolves correctly relative to the application binary.
-            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "Serdes/JsonSchema/Schemas/user.json");
+            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "JsonSchema/Schemas/user.json");
 
             // FindOrCreateVersion (default): reuses an existing version if schema content matches,
             // otherwise creates a new version. This is safe to use in deployments where the same
@@ -129,7 +129,7 @@ namespace Snippets.Serdes.JsonSchema
 
             // Path to the local JSON Schema file to read and register.
             // Use AppContext.BaseDirectory so the path resolves correctly relative to the application binary.
-            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "Serdes/JsonSchema/Schemas/user.json");
+            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "JsonSchema/Schemas/user.json");
 
             // CreateVersion: always creates a new version in the registry, regardless of whether
             // an identical version already exists.
@@ -184,7 +184,7 @@ namespace Snippets.Serdes.JsonSchema
 
             // Path to the local JSON Schema file to read and register.
             // Use AppContext.BaseDirectory so the path resolves correctly relative to the application binary.
-            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "Serdes/JsonSchema/Schemas/user.json");
+            config[JsonSchemaPropertyKeys.SchemaLocation] = Path.Combine(AppContext.BaseDirectory, "JsonSchema/Schemas/user.json");
 
             // Fail: throws a SerializationException if the artifact already exists in the registry.
             // Use this to enforce that schemas are registered exactly once.
