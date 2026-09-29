@@ -26,14 +26,14 @@ using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 
 /// <summary>
-/// Solace Systems Messaging API tutorial: AvroReplier
+/// Solace Messaging API tutorial: AvroReplier
 /// </summary>
 
-namespace Solace.Samples.Avro
+namespace Tutorial
 {
     /// <summary>
     /// AvroReplier
-    /// This class demonstrates the reply side of request/reply messaging over CSCSMP SMF with Avro
+    /// This class demonstrates the reply side of request/reply messaging over the Solace Messaging API for .NET with Avro
     /// serialization. It subscribes to the request topic, deserializes each Avro CreateUser request,
     /// constructs an Avro CreateUserResponse, and sends it back to the request's ReplyTo destination. It
     /// runs continuously until the user presses Enter. Pair it with AvroRequestor.
@@ -55,7 +55,7 @@ namespace Solace.Samples.Avro
         private static RecordSchema _replySchema;
 
         /// <summary>
-        /// The main method that demonstrates the Solace CSCSMP API usage with Avro request/reply (reply side).
+        /// The main method that demonstrates the Solace Messaging API for .NET usage with Avro request/reply (reply side).
         /// </summary>
         /// <param name="args">Command line arguments: &lt;host&gt; &lt;username&gt;@&lt;vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
@@ -89,7 +89,7 @@ namespace Solace.Samples.Avro
             // Parse the reply schema once, up front.
             _replySchema = (RecordSchema)Schema.Parse(File.ReadAllText(ReplySchemaPath));
 
-            // Initialize Solace Systems Messaging API with logging to console at Warning level
+            // Initialize Solace Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
             {
                 SolClientLogLevel = SolLogLevel.Warning
@@ -109,7 +109,7 @@ namespace Solace.Samples.Avro
                     deserializer.Configure(config);
                     serializer.Configure(config);
 
-                    // Wrap the async serializer/deserializer with synchronous adapters: the CSCSMP message
+                    // Wrap the async serializer/deserializer with synchronous adapters: the Solace message
                     // callback and SendReply are synchronous, but AvroSerializer/Deserializer are async.
                     var syncDeserializer = deserializer.AsSyncOverAsync();
                     var syncSerializer = serializer.AsSyncOverAsync();
@@ -221,6 +221,11 @@ namespace Solace.Samples.Avro
             {
                 // A serialization/deserialization failure on one request must not stop the replier.
                 Console.WriteLine("Serialization exception: {0}", ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Any other failure is logged here instead of escaping into the API's dispatch thread.
+                Console.WriteLine("Error in message processing: {0}", ex.Message);
             }
         }
 

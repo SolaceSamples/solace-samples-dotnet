@@ -27,14 +27,14 @@ using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 
 /// <summary>
-/// Solace Systems Messaging API tutorial: AvroRequestor
+/// Solace Messaging API tutorial: AvroRequestor
 /// </summary>
 
-namespace Solace.Samples.Avro
+namespace Tutorial
 {
     /// <summary>
     /// AvroRequestor
-    /// This class demonstrates request/reply messaging over CSCSMP SMF with Avro serialization. It sends
+    /// This class demonstrates request/reply messaging over the Solace Messaging API for .NET with Avro serialization. It sends
     /// Avro-serialized CreateUser request messages and blocks for an Avro-serialized CreateUserResponse
     /// reply per request, deserializing and printing each reply. It runs continuously until the user
     /// presses Enter. Pair it with AvroReplier.
@@ -58,7 +58,7 @@ namespace Solace.Samples.Avro
         private static volatile bool _keepRunning = true;
 
         /// <summary>
-        /// The main method that demonstrates the Solace CSCSMP API usage with Avro request/reply.
+        /// The main method that demonstrates the Solace Messaging API for .NET usage with Avro request/reply.
         /// </summary>
         /// <param name="args">Command line arguments: &lt;host&gt; &lt;username&gt;@&lt;vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
@@ -89,7 +89,7 @@ namespace Solace.Samples.Avro
             string vpnName = split[1];
             string password = args[2];
 
-            // Initialize Solace Systems Messaging API with logging to console at Warning level
+            // Initialize Solace Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
             {
                 SolClientLogLevel = SolLogLevel.Warning
@@ -162,7 +162,7 @@ namespace Solace.Samples.Avro
         /// Runs the request/reply loop: build a CreateUser request, send it and block for the reply,
         /// deserialize the CreateUserResponse and print it, until the user presses Enter.
         /// </summary>
-        /// <param name="session">The active CSCSMP session</param>
+        /// <param name="session">The active Solace session</param>
         /// <param name="serializer">The Avro serializer for the request</param>
         /// <param name="deserializer">The Avro deserializer for the reply</param>
         /// <param name="replyToTopic">The topic replies are delivered on</param>
@@ -229,15 +229,22 @@ namespace Solace.Samples.Avro
                             Console.WriteLine("Request failed with return code: {0}", returnCode);
                         }
                     }
-
-                    // Limit the send rate to make the sample output easy to observe.
-                    Thread.Sleep(1000);
                 }
                 catch (SerializationException ex)
                 {
                     // A serialization/deserialization failure on one request must not stop the loop.
                     Console.WriteLine("Serialization exception: {0}", ex.Message);
                 }
+                catch (Exception ex)
+                {
+                    // Any other failure (e.g. the session went down) is logged so the loop keeps running and
+                    // the exit thread can still be joined when the user presses Enter.
+                    Console.WriteLine("Error during request-reply: {0}", ex.Message);
+                }
+
+                // Limit the send rate to make the sample output easy to observe. This also paces retries
+                // when a request fails.
+                Thread.Sleep(1000);
             }
 
             exitThread.Join();

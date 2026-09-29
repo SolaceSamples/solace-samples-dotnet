@@ -27,14 +27,14 @@ using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 
 /// <summary>
-/// Solace Systems Messaging API tutorial: HelloWorldAvroSerdeSMF
+/// Solace Messaging API tutorial: HelloWorldAvroSerdeSMF
 /// </summary>
 
-namespace Solace.Samples.Avro
+namespace Tutorial
 {
     /// <summary>
     /// HelloWorldAvroSerdeSMF
-    /// This class demonstrates the usage of the Solace CSCSMP API with Avro serialization and deserialization.
+    /// This class demonstrates the usage of the Solace Messaging API for .NET with Avro serialization and deserialization.
     /// It connects to a Solace message broker, publishes a User message using Avro serialization, and consumes
     /// the message using Avro deserialization to a GenericRecord.
     /// </summary>
@@ -53,7 +53,7 @@ namespace Solace.Samples.Avro
         private static ManualResetEventSlim latch = new ManualResetEventSlim(false);
 
         /// <summary>
-        /// The main method that demonstrates the Solace CSCSMP API usage with Avro serialization/deserialization to a GenericRecord.
+        /// The main method that demonstrates the Solace Messaging API for .NET usage with Avro serialization/deserialization to a GenericRecord.
         /// </summary>
         /// <param name="args">Command line arguments: &lt;host&gt; &lt;username@vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
@@ -84,7 +84,7 @@ namespace Solace.Samples.Avro
             string vpnName = split[1];
             string password = args[2];
 
-            // Initialize Solace Systems Messaging API with logging to console at Warning level
+            // Initialize Solace Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
             {
                 SolClientLogLevel = SolLogLevel.Warning
@@ -104,9 +104,9 @@ namespace Solace.Samples.Avro
                     deserializer.Configure(config);
                     serializer.Configure(config);
 
-                    // Wrap async serializer/deserializer with synchronous adapters for use with CSCSMP's synchronous message callbacks.
-                    // CSCSMP's HandleMessage callback is invoked synchronously, but AvroSerializer/Deserializer are async by default.
-                    // AsSyncOverAsync() creates a synchronous wrapper that blocks on async operations, making them compatible with CSCSMP.
+                    // Wrap async serializer/deserializer with synchronous adapters for use with Solace's synchronous message callbacks.
+                    // Solace's HandleMessage callback is invoked synchronously, but AvroSerializer/Deserializer are async by default.
+                    // AsSyncOverAsync() creates a synchronous wrapper that blocks on async operations, making them compatible with the Solace Messaging API for .NET.
                     var syncDeserializer = deserializer.AsSyncOverAsync();
                     var syncSerializer = serializer.AsSyncOverAsync();
 
@@ -122,7 +122,7 @@ namespace Solace.Samples.Avro
                     // Connect to the Solace messaging router
                     Console.WriteLine("Connecting as {0}@{1} on {2}...", userName, vpnName, host);
 
-                    // Create a CSCSMP session and set up the message event handler
+                    // Create a Solace session and set up the message event handler
                     // NOTICE: HandleMessage is passed as the message event handler with the synchronous deserializer
                     using (ISession session = context.CreateSession(sessionProps, (source, msgArgs) => HandleMessage(source, msgArgs, syncDeserializer), null))
                     {
@@ -155,7 +155,7 @@ namespace Solace.Samples.Avro
         }
 
         /// <summary>
-        /// This event handler is invoked by the Solace Systems Messaging API when a message arrives.
+        /// This event handler is invoked by the Solace Messaging API when a message arrives.
         /// It deserializes the received message using Avro deserialization and displays the data.
         /// </summary>
         /// <param name="source">The source object that raised the event</param>
@@ -192,7 +192,7 @@ namespace Solace.Samples.Avro
         /// Main execution method that coordinates the sample workflow.
         /// Creates a message, serializes it with Avro, publishes it to a topic, and waits for it to be received.
         /// </summary>
-        /// <param name="session">The active CSCSMP session</param>
+        /// <param name="session">The active Solace session</param>
         /// <param name="serializer">The Avro serializer to use for message serialization</param>
         static void PublishAndWaitForRoundTrip(ISession session, ISerializer<GenericRecord> serializer)
         {

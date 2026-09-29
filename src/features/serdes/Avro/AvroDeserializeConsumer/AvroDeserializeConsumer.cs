@@ -24,14 +24,14 @@ using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 
 /// <summary>
-/// Solace Systems Messaging API tutorial: AvroDeserializeConsumer
+/// Solace Messaging API tutorial: AvroDeserializeConsumer
 /// </summary>
 
-namespace Solace.Samples.Avro
+namespace Tutorial
 {
     /// <summary>
     /// AvroDeserializeConsumer
-    /// This class demonstrates how to use the Solace CSCSMP API with Avro deserialization to consume messages.
+    /// This class demonstrates how to use the Solace Messaging API for .NET with Avro deserialization to consume messages.
     /// It connects to a Solace message broker, subscribes to a topic, and deserializes each received message into
     /// a User <see cref="GenericRecord"/>. The consumer runs continuously until the user presses Enter to exit.
     /// </summary>
@@ -43,7 +43,7 @@ namespace Solace.Samples.Avro
         public static readonly string TopicName = "solace/samples/avro";
 
         /// <summary>
-        /// The main method that demonstrates the Solace CSCSMP API usage with Avro deserialization.
+        /// The main method that demonstrates the Solace Messaging API for .NET usage with Avro deserialization.
         /// </summary>
         /// <param name="args">Command line arguments: &lt;host&gt; &lt;username&gt;@&lt;vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
@@ -74,7 +74,7 @@ namespace Solace.Samples.Avro
             string vpnName = split[1];
             string password = args[2];
 
-            // Initialize Solace Systems Messaging API with logging to console at Warning level
+            // Initialize Solace Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
             {
                 SolClientLogLevel = SolLogLevel.Warning
@@ -92,8 +92,8 @@ namespace Solace.Samples.Avro
                     var config = GetSchemaRegistryConfig();
                     deserializer.Configure(config);
 
-                    // Wrap the async deserializer with a synchronous adapter for use with CSCSMP's synchronous
-                    // message callback. CSCSMP invokes the message handler synchronously, but AvroDeserializer is
+                    // Wrap the async deserializer with a synchronous adapter for use with Solace's synchronous
+                    // message callback. The API invokes the message handler synchronously, but AvroDeserializer is
                     // async by default; AsSyncOverAsync() blocks on the async work so it can be called from the callback.
                     var syncDeserializer = deserializer.AsSyncOverAsync();
 
@@ -109,9 +109,9 @@ namespace Solace.Samples.Avro
                     // Connect to the Solace messaging router
                     Console.WriteLine("Connecting as {0}@{1} on {2}...", userName, vpnName, host);
 
-                    // Create a CSCSMP session and register the message handler. Unlike a pull-based API, CSCSMP
-                    // delivers direct-topic messages by invoking HandleMessage on its own dispatch thread for
-                    // every message that arrives — this consumer never asks for a message itself.
+                    // Create a Solace session and register the message handler. Unlike a pull-based API, the Solace
+                    // Messaging API for .NET delivers direct-topic messages by invoking HandleMessage on its own
+                    // dispatch thread for every message that arrives — this consumer never asks for a message itself.
                     using (ISession session = context.CreateSession(sessionProps, (source, msgArgs) => HandleMessage(source, msgArgs, syncDeserializer), null))
                     {
                         // Connect to the session
@@ -157,7 +157,7 @@ namespace Solace.Samples.Avro
         }
 
         /// <summary>
-        /// This event handler is invoked by the Solace Systems Messaging API on its dispatch thread whenever a
+        /// This event handler is invoked by the Solace Messaging API on its dispatch thread whenever a
         /// message arrives. It deserializes the received message into a User <see cref="GenericRecord"/> and prints
         /// the field values. A deserialization failure is logged and swallowed so the consumer keeps running.
         /// </summary>

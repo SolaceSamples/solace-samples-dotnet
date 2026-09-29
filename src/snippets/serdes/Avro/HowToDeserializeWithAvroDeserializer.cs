@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avro.Generic;
 using Avro.Specific;
-using com.solace.samples;
+using com.solace.samples.serdes.avro.schema;
 using Solace.SchemaRegistry.Serdes.Avro;
 using Solace.SchemaRegistry.Serdes.Core;
 using Solace.Serdes;

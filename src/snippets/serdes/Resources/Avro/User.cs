@@ -5,7 +5,7 @@
 //    is regenerated
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace com.solace.samples
+namespace com.solace.samples.serdes.avro.schema
 {
 	using System;
 	using System.Collections.Generic;
@@ -16,28 +16,17 @@ namespace com.solace.samples
 	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("avrogen", "1.12.1+9110c693767c1dde2665b2b57939333478b12036")]
 	public partial class User : global::Avro.Specific.ISpecificRecord
 	{
-		public static global::Avro.Schema _SCHEMA = global::Avro.Schema.Parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.solace.samples\",\"fields\":[{\"name\"" +
-				":\"name\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"email\",\"type\":\"s" +
-				"tring\"}]}");
-		private string _name;
+		public static global::Avro.Schema _SCHEMA = global::Avro.Schema.Parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.solace.samples.serdes.avro.schema" +
+				"\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"name\",\"type\":\"string\"},{\"name" +
+				"\":\"email\",\"type\":\"string\"}]}");
 		private string _id;
+		private string _name;
 		private string _email;
 		public virtual global::Avro.Schema Schema
 		{
 			get
 			{
 				return User._SCHEMA;
-			}
-		}
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				this._name = value;
 			}
 		}
 		public string id
@@ -49,6 +38,17 @@ namespace com.solace.samples
 			set
 			{
 				this._id = value;
+			}
+		}
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				this._name = value;
 			}
 		}
 		public string email
@@ -66,8 +66,8 @@ namespace com.solace.samples
 		{
 			switch (fieldPos)
 			{
-			case 0: return this.name;
-			case 1: return this.id;
+			case 0: return this.id;
+			case 1: return this.name;
 			case 2: return this.email;
 			default: throw new global::Avro.AvroRuntimeException("Bad index " + fieldPos + " in Get()");
 			};
@@ -76,8 +76,8 @@ namespace com.solace.samples
 		{
 			switch (fieldPos)
 			{
-			case 0: this.name = (System.String)fieldValue; break;
-			case 1: this.id = (System.String)fieldValue; break;
+			case 0: this.id = (System.String)fieldValue; break;
+			case 1: this.name = (System.String)fieldValue; break;
 			case 2: this.email = (System.String)fieldValue; break;
 			default: throw new global::Avro.AvroRuntimeException("Bad index " + fieldPos + " in Put()");
 			};

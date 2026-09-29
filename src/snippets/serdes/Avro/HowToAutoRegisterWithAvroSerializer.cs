@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avro;
 using Avro.Generic;
-using com.solace.samples;
+using com.solace.samples.serdes.avro.schema;
 using Solace.SchemaRegistry.Serdes.Avro;
 using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
@@ -65,6 +65,9 @@ namespace Snippets.Serdes.Avro
 
             // Set required Schema Registry connection properties.
             // The registry user must have write access to register schemas.
+            config[AvroPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
+            config[AvroPropertyKeys.AuthUsername] = "sr-developer";
+            config[AvroPropertyKeys.AuthPassword] = "devPassword";
 
             // Enable automatic schema registration on the first serialize call.
             config[AvroPropertyKeys.AutoRegisterArtifact] = true;
@@ -111,6 +114,9 @@ namespace Snippets.Serdes.Avro
 
             // Set required Schema Registry connection properties.
             // The registry user must have write access to register schemas.
+            config[AvroPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
+            config[AvroPropertyKeys.AuthUsername] = "sr-developer";
+            config[AvroPropertyKeys.AuthPassword] = "devPassword";
 
             // Enable automatic schema registration on the first serialize call.
             config[AvroPropertyKeys.AutoRegisterArtifact] = true;
@@ -154,6 +160,9 @@ namespace Snippets.Serdes.Avro
 
             // Set required Schema Registry connection properties.
             // The registry user must have write access to register schemas.
+            config[AvroPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
+            config[AvroPropertyKeys.AuthUsername] = "sr-developer";
+            config[AvroPropertyKeys.AuthPassword] = "devPassword";
 
             // Enable automatic schema registration on the first serialize call.
             config[AvroPropertyKeys.AutoRegisterArtifact] = true;
@@ -203,6 +212,9 @@ namespace Snippets.Serdes.Avro
 
             // Set required Schema Registry connection properties.
             // The registry user must have write access to register schemas.
+            config[AvroPropertyKeys.RegistryUrl] = "http://localhost:8081/apis/registry/v3";
+            config[AvroPropertyKeys.AuthUsername] = "sr-developer";
+            config[AvroPropertyKeys.AuthPassword] = "devPassword";
 
             // Enable automatic schema registration on the first serialize call.
             config[AvroPropertyKeys.AutoRegisterArtifact] = true;

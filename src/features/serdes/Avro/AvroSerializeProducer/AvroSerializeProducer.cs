@@ -27,14 +27,14 @@ using Solace.SchemaRegistry.Serdes.Core.Resolver;
 using Solace.Serdes;
 
 /// <summary>
-/// Solace Systems Messaging API tutorial: AvroSerializeProducer
+/// Solace Messaging API tutorial: AvroSerializeProducer
 /// </summary>
 
-namespace Solace.Samples.Avro
+namespace Tutorial
 {
     /// <summary>
     /// AvroSerializeProducer
-    /// This class demonstrates how to use the Solace CSCSMP API with Avro serialization to produce messages.
+    /// This class demonstrates how to use the Solace Messaging API for .NET with Avro serialization to produce messages.
     /// It connects to a Solace message broker, serializes User <see cref="GenericRecord"/> messages using Avro,
     /// and publishes them to a topic. The producer continuously sends messages until the user presses Enter to exit.
     /// </summary>
@@ -53,7 +53,7 @@ namespace Solace.Samples.Avro
         private static volatile bool _keepRunning = true;
 
         /// <summary>
-        /// The main method that demonstrates the Solace CSCSMP API usage with Avro serialization.
+        /// The main method that demonstrates the Solace Messaging API for .NET usage with Avro serialization.
         /// </summary>
         /// <param name="args">Command line arguments: &lt;host&gt; &lt;username&gt;@&lt;vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
@@ -84,7 +84,7 @@ namespace Solace.Samples.Avro
             string vpnName = split[1];
             string password = args[2];
 
-            // Initialize Solace Systems Messaging API with logging to console at Warning level
+            // Initialize Solace Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
             {
                 SolClientLogLevel = SolLogLevel.Warning
@@ -102,9 +102,9 @@ namespace Solace.Samples.Avro
                     var config = GetSchemaRegistryConfig();
                     serializer.Configure(config);
 
-                    // Wrap the async serializer with a synchronous adapter for use with CSCSMP's synchronous message sending.
-                    // CSCSMP's Send path is synchronous, but AvroSerializer is async by default.
-                    // AsSyncOverAsync() creates a synchronous wrapper that blocks on async operations, making them compatible with CSCSMP.
+                    // Wrap the async serializer with a synchronous adapter for use with Solace's synchronous message sending.
+                    // Solace's Send path is synchronous, but AvroSerializer is async by default.
+                    // AsSyncOverAsync() creates a synchronous wrapper that blocks on async operations, making them compatible with the Solace Messaging API for .NET.
                     var syncSerializer = serializer.AsSyncOverAsync();
 
                     // Create session properties for the Solace message broker connection
@@ -119,7 +119,7 @@ namespace Solace.Samples.Avro
                     // Connect to the Solace messaging router
                     Console.WriteLine("Connecting as {0}@{1} on {2}...", userName, vpnName, host);
 
-                    // Create a CSCSMP session
+                    // Create a Solace session
                     using (ISession session = context.CreateSession(sessionProps, null, null))
                     {
                         // Connect to the session
@@ -169,7 +169,7 @@ namespace Solace.Samples.Avro
         /// Continuously produces User <see cref="GenericRecord"/> messages and publishes them to the topic
         /// until the user exits.
         /// </summary>
-        /// <param name="session">The active CSCSMP session</param>
+        /// <param name="session">The active Solace session</param>
         /// <param name="serializer">The Avro serializer to use for message serialization</param>
         static void ProduceMessages(ISession session, ISerializer<GenericRecord> serializer)
         {
