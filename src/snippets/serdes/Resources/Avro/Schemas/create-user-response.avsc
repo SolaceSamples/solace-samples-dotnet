@@ -1,0 +1,8 @@
+{
+  "namespace": "com.solace.samples.serdes.avro.schema",
+  "type": "record",
+  "name": "CreateUserResponse",
+  "fields": [
+    {"name": "id", "type": "string"}
+  ]
+}

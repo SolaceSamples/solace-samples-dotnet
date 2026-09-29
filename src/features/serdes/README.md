@@ -1,6 +1,6 @@
 This folder contains sample .NET applications that demonstrate how to use the Solace Schema Registry SERDES provider for Solace PubSub+ messaging when connecting to a Schema Registry (by default running on `localhost`).
 
-The samples are organized into two groups: **generic** (string serialization without a Schema Registry) and **JsonSchema** (JSON Schema serialization with Schema Registry validation).
+The samples are organized into three groups: **generic** (string serialization without a Schema Registry), **JsonSchema** (JSON Schema serialization with Schema Registry validation), and **Avro** (Avro serialization with schemas resolved from the Schema Registry).
 
 ## Contents
 
@@ -24,18 +24,31 @@ Located in `JsonSchema/`. All JSON Schema samples require a running Solace Schem
 | `JsonSchemaSerdesRequestor` | Sends `CreateUser` request messages serialized with JSON Schema and waits for a `CreateUserResponse` reply. Pairs with `JsonSchemaSerdesReplier`. |
 | `JsonSchemaSerdesReplier` | Receives `CreateUser` requests, deserializes them to `CreateUser` POCOs, generates a unique user ID, and replies with a serialized `CreateUserResponse`. Pairs with `JsonSchemaSerdesRequestor`. |
 
+### Avro Samples
+
+Located in `Avro/`. All Avro samples require a running Solace Schema Registry.
+
+| Project | Description |
+| --- | --- |
+| `HelloWorldAvroSerdeSMF` | Publishes a single `User` `GenericRecord` serialized with Avro and subscribes to receive and deserialize it. Demonstrates the basic serialize/deserialize round-trip with the Schema Registry. |
+| `AvroSerializeProducer` | Continuously publishes `User` `GenericRecord` messages serialized against the `user.avsc` schema to `solace/samples/avro`. Runs until Enter is pressed. |
+| `AvroDeserializeConsumer` | Subscribes to `solace/samples/avro` and deserializes incoming messages to `GenericRecord` instances, using the schema resolved from the registry via the schema id carried in each message. Pairs with `AvroSerializeProducer`. |
+| `AvroRequestor` | Sends `CreateUser` request messages serialized with Avro and waits for a `CreateUserResponse` reply. Pairs with `AvroReplier`. |
+| `AvroReplier` | Receives `CreateUser` requests, deserializes them, generates a unique user ID, and replies with a serialized `CreateUserResponse`. Pairs with `AvroRequestor`. |
+
 ### Shared Resources
 
 The `Resources` project at `Resources/` is a shared class library containing:
 
 - `JsonSchema/User.cs`, `CreateUser.cs`, `CreateUserResponse.cs`, `ClockInOut.cs`: Plain .NET model classes used by the JSON Schema samples.
 - `JsonSchema/Schemas/user.json`, `create-user.json`, `create-user-response.json`, `clock-in-out.json`: The JSON Schema definitions to be uploaded to the Schema Registry.
+- `Avro/Schemas/user.avsc`, `create-user.avsc`, `create-user-response.avsc`: The Avro schema definitions to be uploaded to the Schema Registry. The Avro samples do not reference the `Resources` project; each sample that builds a record links the schema file it needs, so it is copied next to the sample binary and read at runtime.
 
 ## Requirements
 
 - [.NET SDK 8.0](https://dotnet.microsoft.com/download) (the projects also multi-target `net462` for Windows-only builds)
 - A running Solace PubSub+ broker
-- A running [Solace Schema Registry](https://docs.solace.com/Schema-Registry/schema-registry-overview.htm) (required for JSON Schema samples only)
+- A running [Solace Schema Registry](https://docs.solace.com/Schema-Registry/schema-registry-overview.htm) (required for the JSON Schema and Avro samples)
 
 ## Solace Schema Registry
 
@@ -44,7 +57,7 @@ https://docs.solace.com/Schema-Registry/schema-registry-overview.htm
 
 ## Upload a Schema
 
-Before running any JSON Schema sample, the schema files from `Resources/JsonSchema/Schemas/` must be uploaded to the Schema Registry. To upload each schema:
+Before running any JSON Schema or Avro sample, the schema files from `Resources/JsonSchema/Schemas/` (JSON Schema) or `Resources/Avro/Schemas/` (Avro) must be uploaded to the Schema Registry. To upload each schema:
 
 1. Log into the Schema Registry with an account that has write access and click the "Create Artifact" button.
 2. Leave the Group Id field empty.
@@ -57,17 +70,27 @@ Before running any JSON Schema sample, the schema files from `Resources/JsonSche
         - For `clock-in-out.json`, use `solace/samples/clock-in-out/json`
     - **Type**: Select `JSON Schema`.
 
+    ### Avro
+    - **Artifact Id** (one per schema, each uploaded separately):
+        - For `user.avsc`, use `solace/samples/avro`
+        - For `create-user.avsc`, use `solace/samples/create-user/avro`
+        - For `create-user-response.avsc`, use `solace/samples/create-user-response/avro`
+    - **Type**: Select `AVRO`.
+
 > [!NOTE]
 > Each schema must be uploaded separately with its own unique Artifact Id to avoid conflicts.
 
 3. Click "Next" to proceed.
 4. Skip the Artifact Metadata section and click "Next".
 5. On the Version Content Page, leave the version set to auto (or enter a specific value).
-6. Upload the matching schema file from `Resources/JsonSchema/Schemas/`:
+6. Upload the matching schema file from `Resources/JsonSchema/Schemas/` or `Resources/Avro/Schemas/`:
     - For Artifact Id `solace/samples/json`, upload `user.json`
     - For Artifact Id `solace/samples/create-user/json`, upload `create-user.json`
     - For Artifact Id `solace/samples/create-user-response/json`, upload `create-user-response.json`
     - For Artifact Id `solace/samples/clock-in-out/json`, upload `clock-in-out.json`
+    - For Artifact Id `solace/samples/avro`, upload `user.avsc`
+    - For Artifact Id `solace/samples/create-user/avro`, upload `create-user.avsc`
+    - For Artifact Id `solace/samples/create-user-response/avro`, upload `create-user-response.avsc`
 7. Click "Next", skip Version Metadata, then click "Create".
 
 ## Building the Samples
@@ -76,6 +99,12 @@ Build an individual sample from its project directory:
 
 ```shell
 dotnet build JsonSchema/JsonSchemaSerializeProducer/JsonSchemaSerializeProducer.csproj
+```
+
+Or build all the Avro samples at once:
+
+```shell
+dotnet build Avro/AvroSamples.sln
 ```
 
 Or build the Resources library first if building manually:
@@ -144,9 +173,56 @@ cd JsonSchema/JsonSchemaSerdesRequestor
 dotnet run -- <host:port> <username>@<vpnname> <password>
 ```
 
+### Avro: Hello World
+
+Publishes a single `User` `GenericRecord` and receives it on the same topic.
+
+```shell
+cd Avro/HelloWorldAvroSerdeSMF
+dotnet run -- <host:port> <username>@<vpnname> <password>
+# Example:
+dotnet run -- localhost:55555 default@default default
+```
+
+### Avro: Producer
+
+Continuously publishes `User` messages to `solace/samples/avro` until Enter is pressed.
+
+```shell
+cd Avro/AvroSerializeProducer
+dotnet run -- <host:port> <username>@<vpnname> <password>
+# Example:
+dotnet run -- localhost:55555 default@default default
+```
+
+### Avro: Consumer
+
+Subscribes to `solace/samples/avro` and deserializes received messages to `GenericRecord` instances. Run it alongside `AvroSerializeProducer`.
+
+```shell
+cd Avro/AvroDeserializeConsumer
+dotnet run -- <host:port> <username>@<vpnname> <password>
+# Example:
+dotnet run -- localhost:55555 default@default default
+```
+
+### Avro: Request/Reply
+
+Run the replier first, then the requestor. The requestor sends `CreateUser` requests and prints the `CreateUserResponse` containing the generated user ID.
+
+```shell
+# Terminal 1 - start the replier
+cd Avro/AvroReplier
+dotnet run -- <host:port> <username>@<vpnname> <password>
+
+# Terminal 2 - start the requestor
+cd Avro/AvroRequestor
+dotnet run -- <host:port> <username>@<vpnname> <password>
+```
+
 ## Environment Variables
 
-The Schema Registry connection can be customized by setting environment variables before launching a JSON Schema sample. If unset, the defaults below are used.
+The Schema Registry connection can be customized by setting environment variables before launching a JSON Schema or Avro sample. If unset, the defaults below are used.
 
 ```shell
 export REGISTRY_URL="http://localhost:8081/apis/registry/v3"

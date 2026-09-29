@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net462</TargetFrameworks>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.29.0" />
+    <PackageReference Include="Solace.SchemaRegistry.Serdes.Avro" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The Avro User schema is shared from the Resources folder. It is linked here (rather than
+         copied per sample) so it lands in this app's output directory, where the sample reads it at
+         runtime via AppContext.BaseDirectory. This is the same schema registered in the Schema
+         Registry under solace/samples/avro. -->
+    <Content Include="..\..\Resources\Avro\Schemas\user.avsc" Link="user.avsc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

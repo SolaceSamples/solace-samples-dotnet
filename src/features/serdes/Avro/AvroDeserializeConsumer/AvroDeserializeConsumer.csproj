@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net462</TargetFrameworks>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.29.0" />
+    <PackageReference Include="Solace.SchemaRegistry.Serdes.Avro" Version="1.2.0" />
+  </ItemGroup>
+
+  <!-- No user.avsc here: the consumer resolves the schema from the registry using the schema id
+       carried in each message header, so it never reads the schema file itself. The schema must be
+       registered under the topic name (solace/samples/avro) before running, just as for the producer. -->
+</Project>
