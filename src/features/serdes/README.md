@@ -121,9 +121,9 @@ Publishes two string messages and receives them on the same topic.
 
 ```shell
 cd generic/HelloWorldSolaceDotnetStringSerde
-dotnet run -- <host:port> <message-vpn> <client-username> [password]
+dotnet run -- <host:port> <username>@<vpnname> <password>
 # Example:
-dotnet run -- localhost:55555 default default
+dotnet run -- localhost:55555 default@default default
 ```
 
 ### JSON Schema: Hello World

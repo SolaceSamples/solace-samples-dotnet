@@ -40,20 +40,29 @@ namespace Tutorial
         /// <summary>
         /// The main method that demonstrates the Solace Messaging API for .NET usage with String serialization/deserialization.
         /// </summary>
-        /// <param name="args">Command line arguments: &lt;host:port&gt; &lt;message-vpn&gt; &lt;client-username&gt; [password]</param>
+        /// <param name="args">Command line arguments: &lt;host&gt; &lt;username&gt;@&lt;vpnname&gt; &lt;password&gt;</param>
         /// <returns>0 on success, 1 on failure</returns>
         static int Main(string[] args)
         {
+            // Check if the required command line arguments are provided
             if (args.Length < 3)
             {
-                Console.WriteLine("Usage: HelloWorldSolaceDotnetStringSerde <host:port> <message-vpn> <client-username> [password]");
+                Console.WriteLine("Usage: HelloWorldSolaceDotnetStringSerde <host> <username>@<vpnname> <password>");
+                return 1;
+            }
+
+            // Extract connection details from command line arguments
+            string[] split = args[1].Split('@');
+            if (split.Length != 2)
+            {
+                Console.WriteLine("Usage: HelloWorldSolaceDotnetStringSerde <host> <username>@<vpnname> <password>");
                 return 1;
             }
 
             string host = args[0];
-            string vpnname = args[1];
-            string username = args[2];
-            string password = args.Length > 3 ? args[3] : "";
+            string username = split[0];
+            string vpnname = split[1];
+            string password = args[2];
 
             // Initialize Solace Systems Messaging API with logging to console at Warning level
             ContextFactoryProperties cfp = new ContextFactoryProperties()
