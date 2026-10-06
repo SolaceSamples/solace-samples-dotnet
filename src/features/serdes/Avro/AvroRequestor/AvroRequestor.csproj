@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0;net462</TargetFrameworks>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SolaceSystems.Solclient.Messaging" Version="10.29.0" />
+    <PackageReference Include="Solace.SchemaRegistry.Serdes.Avro" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The requestor BUILDS the CreateUser request record, so it needs the request schema at runtime.
+         The reply (CreateUserResponse) is decoded using the schema resolved from the registry, so no
+         reply schema file is needed. Linked from the shared Resources folder. -->
+    <Content Include="..\..\Resources\Avro\Schemas\create-user.avsc" Link="create-user.avsc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

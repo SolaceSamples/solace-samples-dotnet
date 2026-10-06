@@ -1,0 +1,9 @@
+{
+  "namespace": "com.solace.samples.serdes.avro.schema",
+  "type": "record",
+  "name": "CreateUser",
+  "fields": [
+    {"name": "name", "type": "string"},
+    {"name": "email", "type": "string"}
+  ]
+}

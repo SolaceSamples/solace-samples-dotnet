@@ -8,6 +8,14 @@
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="9.0.9" Condition="'$(TargetFramework)' == 'net462'"/>
     <PackageReference Include="System.Net.Http" Version="4.3.4" Condition="'$(TargetFramework)' == 'net462'"/>
+    <!-- Required by the avrogen-generated Avro specific record (Avro/User.cs). -->
+    <PackageReference Include="Apache.Avro" Version="1.12.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Avro\Schemas\*.avsc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

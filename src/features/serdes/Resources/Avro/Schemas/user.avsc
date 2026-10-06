@@ -1,0 +1,10 @@
+{
+  "namespace": "com.solace.samples.serdes.avro.schema",
+  "type": "record",
+  "name": "User",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "name", "type": "string"},
+    {"name": "email", "type": "string"}
+  ]
+}
